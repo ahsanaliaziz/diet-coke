@@ -77,8 +77,28 @@
   window.addEventListener('resize', resizeCanvas);
 
   // --- 3. Draw Frame on Canvas with Aspect Ratio Contain ---
+  // --- 3. Draw Frame on Canvas with Aspect Ratio Contain & Fallback ---
+  function getClosestLoadedFrame(index) {
+    if (frames[index] && frames[index].complete && frames[index].naturalWidth > 0) {
+      return frames[index];
+    }
+    // Search backwards first (most common scroll path)
+    for (let i = index - 1; i >= 0; i--) {
+      if (frames[i] && frames[i].complete && frames[i].naturalWidth > 0) {
+        return frames[i];
+      }
+    }
+    // Search forwards
+    for (let i = index + 1; i < TOTAL_FRAMES; i++) {
+      if (frames[i] && frames[i].complete && frames[i].naturalWidth > 0) {
+        return frames[i];
+      }
+    }
+    return frames[0] || null;
+  }
+
   function renderFrame(index) {
-    const img = frames[index];
+    const img = getClosestLoadedFrame(index);
     if (!img || !img.complete || img.naturalWidth === 0) return;
 
     // Fill background with matching dark shade
@@ -107,42 +127,93 @@
     ctx.drawImage(img, drawX, drawY, drawW, drawH);
   }
 
-  // --- 4. Frame Preloader ---
+  // --- 4. Instant Millisecond Loader & Progressive Frame Streaming ---
+  let loaderDismissed = false;
+
+  function dismissLoader() {
+    if (loaderDismissed) return;
+    loaderDismissed = true;
+    if (loader) {
+      loader.classList.add('loaded');
+      setTimeout(() => {
+        loader.style.display = 'none';
+      }, 200);
+    }
+  }
+
   function preloadImages() {
-    for (let i = 1; i <= TOTAL_FRAMES; i++) {
+    // 1. Instant First Frame Load -> Instant Millisecond Reveal
+    const firstImg = new Image();
+    firstImg.src = `${FRAME_PREFIX}001${FRAME_EXT}`;
+    firstImg.onload = () => {
+      frames[0] = firstImg;
+      loadedCount++;
+      resizeCanvas();
+      renderFrame(0);
+      dismissLoader();
+      startProgressiveStream();
+    };
+    firstImg.onerror = () => {
+      dismissLoader();
+      startProgressiveStream();
+    };
+
+    // 2. Strict Millisecond Guarantee: reveal within 200ms regardless of connection
+    setTimeout(() => {
+      dismissLoader();
+      if (!firstImg.complete) {
+        startProgressiveStream();
+      }
+    }, 200);
+  }
+
+  function startProgressiveStream() {
+    // Prioritized queue:
+    // A. Opening 25 frames for butter-smooth start
+    // B. Keyframe milestones (every 6th frame) for instant timeline scrub
+    // C. All remaining frames in parallel worker chunks
+    const keyframes = [];
+    for (let i = 2; i <= Math.min(25, TOTAL_FRAMES); i++) {
+      keyframes.push(i);
+    }
+    for (let i = 30; i <= TOTAL_FRAMES; i += 6) {
+      if (!keyframes.includes(i)) keyframes.push(i);
+    }
+    for (let i = 2; i <= TOTAL_FRAMES; i++) {
+      if (!keyframes.includes(i)) keyframes.push(i);
+    }
+
+    let queueIdx = 0;
+    const CONCURRENCY = 8;
+
+    function fetchNext() {
+      if (queueIdx >= keyframes.length) {
+        isAllLoaded = true;
+        return;
+      }
+      const frameNum = keyframes[queueIdx++];
+      const fIdx = frameNum - 1;
+
+      if (frames[fIdx]) {
+        fetchNext();
+        return;
+      }
+
       const img = new Image();
-      const index = i - 1;
-      const src = `${FRAME_PREFIX}${padNumber(i)}${FRAME_EXT}`;
-
-      img.src = src;
+      img.src = `${FRAME_PREFIX}${padNumber(frameNum)}${FRAME_EXT}`;
       img.onload = () => {
-        frames[index] = img;
+        frames[fIdx] = img;
         loadedCount++;
-
-        const percent = Math.round((loadedCount / TOTAL_FRAMES) * 100);
-        if (loaderPercent) loaderPercent.textContent = `${percent}%`;
-        if (loaderBar) loaderBar.style.width = `${percent}%`;
-
-        if (loadedCount === 1) {
-          resizeCanvas();
-          renderFrame(0);
-        }
-
-        if (loadedCount === TOTAL_FRAMES) {
-          isAllLoaded = true;
-          setTimeout(() => {
-            if (loader) loader.classList.add('loaded');
-          }, 350);
-        }
+        fetchNext();
       };
-
       img.onerror = () => {
         loadedCount++;
-        if (loadedCount === TOTAL_FRAMES) {
-          isAllLoaded = true;
-          if (loader) loader.classList.add('loaded');
-        }
+        fetchNext();
       };
+    }
+
+    for (let c = 0; c < CONCURRENCY; c++) {
+      fetchNext();
     }
   }
 
