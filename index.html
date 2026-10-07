@@ -1,0 +1,797 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>Diet Coke — Kinetic Ignition &amp; Aesthetic Showcase</title>
+
+  <!-- Typography & Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@500;700;800&family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;0,6..96,600;1,6..96,400&family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+
+  <!-- Tailwind CSS CDN & Config -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "secondary": "#c3c7cd",
+            "inverse-primary": "#bf0029",
+            "inverse-on-surface": "#303032",
+            "on-primary-fixed-variant": "#92001d",
+            "on-tertiary-fixed-variant": "#414750",
+            "primary": "#ffb3b1",
+            "secondary-fixed-dim": "#c3c7cd",
+            "background": "#131315",
+            "on-error": "#690005",
+            "surface-bright": "#39393b",
+            "primary-container": "#e31837",
+            "on-background": "#e5e1e4",
+            "secondary-container": "#454a4f",
+            "tertiary": "#c1c7d1",
+            "surface": "#131315",
+            "inverse-surface": "#e5e1e4",
+            "surface-tint": "#ffb3b1",
+            "surface-container-lowest": "#0e0e10",
+            "on-tertiary-fixed": "#161c24",
+            "on-error-container": "#ffdad6",
+            "surface-container-highest": "#353437",
+            "on-secondary-fixed-variant": "#43474c",
+            "surface-container": "#201f21",
+            "tertiary-fixed": "#dde3ee",
+            "error-container": "#93000a",
+            "outline-variant": "#5d3f3e",
+            "on-primary-fixed": "#410007",
+            "on-secondary-fixed": "#171c20",
+            "on-tertiary-container": "#fafaff",
+            "error": "#ffb4ab",
+            "on-secondary": "#2c3136",
+            "surface-dim": "#131315",
+            "outline": "#ad8886",
+            "surface-variant": "#353437",
+            "secondary-fixed": "#dfe3e9",
+            "on-surface": "#e5e1e4",
+            "on-tertiary": "#2b3139",
+            "on-primary-container": "#fffaf9",
+            "tertiary-container": "#6e747e",
+            "surface-container-low": "#1b1b1d",
+            "tertiary-fixed-dim": "#c1c7d1",
+            "surface-container-high": "#2a2a2c",
+            "on-surface-variant": "#e6bdbb",
+            "primary-fixed": "#ffdad8",
+            "primary-fixed-dim": "#ffb3b1",
+            "on-secondary-container": "#b4b9bf",
+            "on-primary": "#680011"
+          },
+          borderRadius: {
+            "DEFAULT": "0.125rem",
+            "lg": "0.25rem",
+            "xl": "0.5rem",
+            "full": "0.75rem"
+          },
+          spacing: {
+            "space-lg": "2rem",
+            "gutter": "1.5rem",
+            "margin": "4rem",
+            "gutter-mobile": "1rem",
+            "space-md": "1rem",
+            "margin-mobile": "1.25rem",
+            "space-xs": "0.25rem",
+            "space-xl": "3.5rem",
+            "space-sm": "0.5rem"
+          },
+          fontFamily: {
+            "body-sm": ["Hanken Grotesk", "sans-serif"],
+            "display-lg": ["Bodoni Moda", "serif"],
+            "headline-sm": ["Bodoni Moda", "serif"],
+            "body-md": ["Hanken Grotesk", "sans-serif"],
+            "headline-md": ["Bodoni Moda", "serif"],
+            "body-lg": ["Hanken Grotesk", "sans-serif"],
+            "label-md": ["Hanken Grotesk", "sans-serif"],
+            "label-lg": ["Hanken Grotesk", "sans-serif"],
+            "headline-lg-mobile": ["Bodoni Moda", "serif"],
+            "headline-lg": ["Bodoni Moda", "serif"],
+            "label-sm": ["Hanken Grotesk", "sans-serif"],
+            "display-lg-mobile": ["Bodoni Moda", "serif"],
+            "display-xl-mobile": ["Bodoni Moda", "serif"],
+            "display-xl": ["Bodoni Moda", "serif"]
+          }
+        }
+      }
+    };
+  </script>
+
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-surface text-on-surface min-h-screen antialiased selection:bg-primary-container selection:text-on-primary-container">
+
+  <!-- Preloading Screen -->
+  <div id="loader" class="loader">
+    <div class="loader-content">
+      <div class="brand-tag">DIET COKE EXPERIENCE</div>
+      <div class="loader-visual">
+        <div class="loader-ring"></div>
+        <div class="loader-center-text" id="loader-percent">0%</div>
+      </div>
+      <div class="loader-caption">CHILLING THE FRAMES (0 / 240)...</div>
+      <div class="loader-progress-bar">
+        <div class="loader-progress-fill" id="loader-bar"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Global Navigation Bar -->
+  <header class="navbar" id="main-nav">
+    <div class="nav-brand" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" style="cursor: pointer;">
+      <span class="diet-logo">Diet</span>
+      <span class="coke-logo">Coke</span>
+    </div>
+
+    <div class="nav-badges">
+      <div class="badge-pill">
+        <span class="pulse-dot"></span>
+        <span>4K 60FPS SEQUENCE</span>
+      </div>
+      <div class="badge-pill frame-counter-pill" id="frame-pill">
+        FRAME: <span id="nav-frame-num">001</span>/240
+      </div>
+    </div>
+
+    <div class="nav-actions">
+      <button class="nav-btn" onclick="scrollToShowcase()">
+        <span>Showcase ↓</span>
+      </button>
+
+      <button id="sound-btn" class="nav-btn" title="Toggle Sound FX">
+        <svg id="sound-icon-off" class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+          <line x1="23" y1="9" x2="17" y2="15"></line>
+          <line x1="17" y1="9" x2="23" y2="15"></line>
+        </svg>
+        <svg id="sound-icon-on" class="icon hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+          <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+        </svg>
+        <span id="sound-label">Audio FX</span>
+      </button>
+
+      <button id="autoplay-btn" class="nav-btn primary-btn">
+        <svg id="play-icon" class="icon" viewBox="0 0 24 24" fill="currentColor">
+          <polygon points="5 3 19 12 5 21 5 3"></polygon>
+        </svg>
+        <svg id="pause-icon" class="icon hidden" viewBox="0 0 24 24" fill="currentColor">
+          <rect x="6" y="4" width="4" height="16"></rect>
+          <rect x="14" y="4" width="4" height="16"></rect>
+        </svg>
+        <span id="play-label">Auto-Play</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- =====================================================================
+       FIXED CANVAS STAGE (Always stays fixed during 240-frame sequence)
+       ===================================================================== -->
+  <div class="stage-container" id="stage-container">
+    <canvas id="coke-canvas"></canvas>
+    <div class="stage-vignette"></div>
+    <div class="stage-glow"></div>
+  </div>
+
+  <!-- =====================================================================
+       FIXED STORY OVERLAYS (Rest -> Burst -> Zero-G -> Settle)
+       ===================================================================== -->
+  <div class="story-overlays-container" id="story-overlays">
+
+    <!-- 01. Rest: Intro State (Frames 1-60) -->
+    <section class="story-section section-intro active" data-start="0" data-end="0.25">
+      <div class="content-wrapper center-align">
+        <div class="kicker-tag">THE REFRESHMENT REVOLUTION</div>
+        <h1 class="hero-title">
+          PURE BITE.<br>
+          <span class="red-gradient-text">ZERO COMPROMISE.</span>
+        </h1>
+        <p class="hero-desc">
+          Crafted with signature crisp effervescence and sub-zero chill.
+          Scroll down to ignite the kinetic splash shockwave.
+        </p>
+
+        <div class="specs-ribbon">
+          <div class="spec-item">
+            <span class="spec-value">0</span>
+            <span class="spec-label">CALORIES</span>
+          </div>
+          <div class="spec-divider"></div>
+          <div class="spec-item">
+            <span class="spec-value">0g</span>
+            <span class="spec-label">SUGAR</span>
+          </div>
+          <div class="spec-divider"></div>
+          <div class="spec-item">
+            <span class="spec-value">-2°C</span>
+            <span class="spec-label">FROST PEAK</span>
+          </div>
+          <div class="spec-divider"></div>
+          <div class="spec-item">
+            <span class="spec-value">100%</span>
+            <span class="spec-label">ICONIC</span>
+          </div>
+        </div>
+
+        <div class="scroll-indicator">
+          <span class="mouse-icon">
+            <span class="wheel"></span>
+          </span>
+          <span class="indicator-text">SCROLL TO IGNITE</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- 02. Burst: High-Velocity Splash (Frames 60-132) -->
+    <section class="story-section section-burst" data-start="0.25" data-end="0.55">
+      <div class="content-wrapper split-layout">
+        <div class="hud-card left-card glass-panel">
+          <div class="hud-pill">PHYSICS ENGINE</div>
+          <h3>MICRO-CARBONATION BURST</h3>
+          <p>
+            An instantaneous pressure release launches crisp liquid droplets and icy crystals in synchronized 3D velocity.
+          </p>
+          <div class="hud-meter">
+            <div class="meter-bar" style="width: 88%;"></div>
+            <span class="meter-label">PRESSURE VELOCITY: 4.8 BAR</span>
+          </div>
+        </div>
+
+        <div class="hud-card right-card glass-panel">
+          <div class="hud-pill crimson">CRYSTAL LATTICE</div>
+          <h3>SUB-ZERO SHOCK</h3>
+          <p>
+            Flash-frozen condensation droplets clinging to aircraft-grade aluminum, delivering an unmatched sensory chill.
+          </p>
+          <div class="hud-stats-grid">
+            <div class="hud-mini-stat">
+              <span class="num">240</span>
+              <span class="lbl">HIGH-SPEED FRAMES</span>
+            </div>
+            <div class="hud-mini-stat">
+              <span class="num">1080p</span>
+              <span class="lbl">ULTRA-DEFINITION</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 03. Zero-G: Bullet-Time Ice Suspension (Frames 132-192) -->
+    <section class="story-section section-orbit" data-start="0.55" data-end="0.80">
+      <div class="content-wrapper centered-wide">
+        <div class="kicker-tag crimson-tag">BULLET-TIME SUSPENSION</div>
+        <h2 class="section-title">
+          TIME STANDS STILL.<br>
+          <span class="silver-gradient-text">THE ICE DANCES.</span>
+        </h2>
+        <p class="section-desc">
+          Sculpted ice cubes float in zero-gravity orbit around the unmistakable Diet Coke crimson and silver silhouette.
+        </p>
+
+        <div class="orbit-pills">
+          <span class="orbit-chip">🧊 Floating Crystalline Cubes</span>
+          <span class="orbit-chip">✨ Micro-droplet Dispersion</span>
+          <span class="orbit-chip">⚡ Cold-Activated Matte Finish</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- 04. Settle: Re-engagement & Finale (Frames 192-240) -->
+    <section class="story-section section-finale" data-start="0.80" data-end="1.0">
+      <div class="content-wrapper center-align">
+        <div class="finale-badge">SEALED AT FROST TEMPERATURE</div>
+        <h2 class="hero-title">
+          BREAK THE ROUTINE.<br>
+          <span class="red-gradient-text">TASTE THE ICON.</span>
+        </h2>
+        <p class="hero-desc">
+          The kinetic splash settles into ice-cold perfection.
+          Scroll down to enter the Silver Aesthetic Lookbook.
+        </p>
+
+        <div class="cta-actions">
+          <button class="cta-btn primary-glow" onclick="scrollToShowcase()">
+            <span>EXPLORE SHOWCASE</span>
+            <svg class="icon arrow-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="12" y1="5" x2="12" y2="19"></line>
+              <polyline points="19 12 12 19 5 12"></polyline>
+            </svg>
+          </button>
+          <button class="cta-btn secondary-btn" id="replay-btn">
+            <span>REPLAY SEQUENCE</span>
+            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.19"></path>
+            </svg>
+          </button>
+        </div>
+
+        <div class="scroll-down-hint" onclick="scrollToShowcase()" style="cursor: pointer;">
+          <span class="material-symbols-outlined text-[24px] text-primary animate-bounce">keyboard_double_arrow_down</span>
+          <span class="text-xs uppercase tracking-widest text-secondary font-semibold">Keep Scrolling For Lookbook</span>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- =====================================================================
+       SCROLL SPACER TRACK (420vh: Controls the 240-frame sequence)
+       ===================================================================== -->
+  <div class="scroll-animation-track" id="scroll-animation-track"></div>
+
+  <!-- =====================================================================
+       BOTTOM SCRUBBER CONTROLLER
+       ===================================================================== -->
+  <div class="bottom-controller" id="bottom-controller">
+    <div class="controller-card glass-panel">
+      <div class="scrub-header">
+        <div class="scrub-title">
+          <span class="timeline-indicator"></span>
+          <span>INTERACTIVE TIMELINE</span>
+        </div>
+        <div class="scrub-markers">
+          <button class="marker-btn" data-target="0">01. Rest</button>
+          <button class="marker-btn" data-target="0.38">02. Burst</button>
+          <button class="marker-btn" data-target="0.68">03. Zero-G</button>
+          <button class="marker-btn" data-target="0.96">04. Settle</button>
+        </div>
+      </div>
+
+      <div class="scrubber-wrapper">
+        <input type="range" id="scrubber-slider" min="0" max="239" value="0" step="1" aria-label="Frame scrubber">
+        <div class="scrub-progress-fill" id="scrub-fill"></div>
+      </div>
+
+      <div class="scrub-footer">
+        <span class="scrub-time">FRAME <span id="scrub-frame-val">001</span> / 240</span>
+        <span class="scrub-hint">SCROLL OR DRAG TO SCRUB</span>
+        <span class="scrub-fps">60 FPS REALTIME</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- =====================================================================
+       PART 2: DIET COKE AESTHETIC SHOWCASE (APPENDED BELOW SCROLL ANIMATION)
+       (Nav bar and hero section removed as requested)
+       ===================================================================== -->
+  <div id="showcase-start" class="showcase-container">
+    <!-- Ambient Backdrop Light Glow -->
+    <div class="relative w-full overflow-hidden max-w-2xl mx-auto px-4 sm:px-6">
+      <div class="absolute -top-32 left-1/2 -translate-x-1/2 w-[340px] h-[340px] bg-primary-container/15 rounded-full blur-[110px] pointer-events-none"></div>
+      <div class="absolute top-96 -right-24 w-64 h-64 bg-secondary/10 rounded-full blur-[90px] pointer-events-none"></div>
+
+      <!-- Section Separator Badge -->
+      <div class="pt-16 pb-6 flex items-center justify-center">
+        <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-surface-container-high/80 border border-white/10 backdrop-blur-md">
+          <span class="w-2 h-2 rounded-full bg-primary-container animate-pulse"></span>
+          <span class="font-label-sm text-label-sm uppercase tracking-widest text-primary-fixed">The Silver Aesthetic Showcase • Vol. 82</span>
+        </div>
+      </div>
+
+      <!-- 2. THE ANATOMY OF CRISPNESS -->
+      <section class="py-space-lg flex flex-col gap-space-md">
+        <div class="flex flex-col">
+          <span class="font-label-sm text-label-sm uppercase tracking-widest text-primary-container">Sensory Engineering</span>
+          <h2 class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface uppercase tracking-tight">The Anatomy of Crispness</h2>
+          <p class="font-body-sm text-body-sm text-secondary mt-1">Why nothing hits the tongue quite like an iced silver can.</p>
+        </div>
+
+        <!-- Sensory Feature Cards -->
+        <div class="flex flex-col gap-space-sm">
+          <!-- Feature 1 -->
+          <div class="bg-surface-container-low rounded-xl p-space-md flex gap-space-md items-start shadow-sm border border-white/5 hover:border-white/15 transition-all">
+            <div class="w-12 h-12 rounded-lg bg-surface-container-highest flex items-center justify-center text-primary shrink-0 shadow-inner">
+              <span class="material-symbols-outlined text-[26px]">thermometer_gain</span>
+            </div>
+            <div class="flex flex-col min-w-0">
+              <div class="flex items-center justify-between">
+                <h3 class="font-headline-sm text-headline-sm text-on-surface">Sub-Zero Temperature</h3>
+                <span class="font-label-sm text-label-sm text-primary uppercase font-semibold">35°F Optimum</span>
+              </div>
+              <p class="font-body-sm text-body-sm text-secondary mt-1 leading-relaxed">
+                Precision chilling crystallizes surface droplets on polished aluminum, priming each molecule for the ultimate thermal snap.
+              </p>
+            </div>
+          </div>
+
+          <!-- Feature 2 -->
+          <div class="bg-surface-container-low rounded-xl p-space-md flex gap-space-md items-start shadow-sm border border-white/5 hover:border-white/15 transition-all">
+            <div class="w-12 h-12 rounded-lg bg-surface-container-highest flex items-center justify-center text-primary-fixed-dim shrink-0 shadow-inner">
+              <span class="material-symbols-outlined text-[26px]">grain</span>
+            </div>
+            <div class="flex flex-col min-w-0">
+              <div class="flex items-center justify-between">
+                <h3 class="font-headline-sm text-headline-sm text-on-surface">Vibrant Effervescence</h3>
+                <span class="font-label-sm text-label-sm text-secondary uppercase font-semibold">Micro-Bubbles</span>
+              </div>
+              <p class="font-body-sm text-body-sm text-secondary mt-1 leading-relaxed">
+                Tightly bound carbonation engineered to awaken sensory receptors instantly, tingling through the palate with zero lingering drag.
+              </p>
+            </div>
+          </div>
+
+          <!-- Feature 3 -->
+          <div class="bg-surface-container-low rounded-xl p-space-md flex gap-space-md items-start shadow-sm border border-white/5 hover:border-white/15 transition-all">
+            <div class="w-12 h-12 rounded-lg bg-surface-container-highest flex items-center justify-center text-primary shrink-0 shadow-inner">
+              <span class="material-symbols-outlined text-[26px]">star</span>
+            </div>
+            <div class="flex flex-col min-w-0">
+              <div class="flex items-center justify-between">
+                <h3 class="font-headline-sm text-headline-sm text-on-surface">The Silver Finish</h3>
+                <span class="font-label-sm text-label-sm text-primary uppercase font-semibold">Signature Note</span>
+              </div>
+              <p class="font-body-sm text-body-sm text-secondary mt-1 leading-relaxed">
+                A distinctive, ultra-clean bite that refreshes without heaviness. An iconic, laser-focused profile that has defined pop culture.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 3. SOUND OF CHILL (SENSORY ASMR RITUAL) -->
+      <section class="py-space-md">
+        <div class="w-full bg-gradient-to-br from-surface-container-high to-surface-container-low rounded-2xl p-space-md shadow-xl flex flex-col gap-space-sm relative overflow-hidden border border-white/5">
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-2">
+              <span class="material-symbols-outlined text-primary-container text-[20px] animate-pulse">graphic_eq</span>
+              <span class="font-label-sm text-label-sm uppercase tracking-widest text-on-surface">Sensory Audio Ritual</span>
+            </div>
+            <span class="font-label-sm text-label-sm text-secondary">3 Stages</span>
+          </div>
+
+          <h3 class="font-headline-sm text-headline-sm text-on-surface">The Audio Anatomy of Chill</h3>
+          <p class="font-body-sm text-body-sm text-secondary">Tap each trigger to preview the iconic cadence of popping an icy can.</p>
+
+          <!-- Waveform Selector Tabs -->
+          <div class="grid grid-cols-3 gap-2 mt-space-xs" id="asmr-controller">
+            <button class="asmr-btn p-3 rounded-xl bg-surface-container-highest text-left transition-all active:scale-95 flex flex-col justify-between h-24" onclick="playTrigger(0, this)">
+              <span class="material-symbols-outlined text-primary text-[22px]">eject</span>
+              <div>
+                <p class="font-label-sm text-label-sm text-on-surface font-semibold leading-tight">The Tab Crack</p>
+                <span class="font-body-sm text-[11px] text-secondary">0:01 Snap</span>
+              </div>
+            </button>
+
+            <button class="asmr-btn p-3 rounded-xl bg-surface-container text-left transition-all active:scale-95 flex flex-col justify-between h-24" onclick="playTrigger(1, this)">
+              <span class="material-symbols-outlined text-secondary text-[22px]">water_drop</span>
+              <div>
+                <p class="font-label-sm text-label-sm text-on-surface font-semibold leading-tight">Micro-Fizz</p>
+                <span class="font-body-sm text-[11px] text-secondary">0:03 Hiss</span>
+              </div>
+            </button>
+
+            <button class="asmr-btn p-3 rounded-xl bg-surface-container text-left transition-all active:scale-95 flex flex-col justify-between h-24" onclick="playTrigger(2, this)">
+              <span class="material-symbols-outlined text-secondary text-[22px]">icecream</span>
+              <div>
+                <p class="font-label-sm text-label-sm text-on-surface font-semibold leading-tight">Clinking Ice</p>
+                <span class="font-body-sm text-[11px] text-secondary">0:02 Tumble</span>
+              </div>
+            </button>
+          </div>
+
+          <!-- Waveform Visualizer Display -->
+          <div class="mt-space-xs bg-surface-container-lowest/80 p-3 rounded-xl flex items-center justify-between gap-1 h-14 px-4 border border-white/5">
+            <div class="h-4 w-1 bg-primary-container rounded-full animate-pulse"></div>
+            <div class="h-7 w-1 bg-primary rounded-full animate-bounce"></div>
+            <div class="h-10 w-1 bg-white rounded-full animate-pulse"></div>
+            <div class="h-5 w-1 bg-primary-container rounded-full animate-bounce"></div>
+            <div class="h-8 w-1 bg-primary rounded-full animate-pulse"></div>
+            <div class="h-3 w-1 bg-secondary rounded-full animate-bounce"></div>
+            <div class="h-9 w-1 bg-white rounded-full animate-pulse"></div>
+            <div class="h-6 w-1 bg-primary-container rounded-full animate-bounce"></div>
+            <div class="h-10 w-1 bg-primary rounded-full animate-pulse"></div>
+            <div class="h-4 w-1 bg-secondary rounded-full animate-bounce"></div>
+            <div class="h-8 w-1 bg-white rounded-full animate-pulse"></div>
+            <div class="h-5 w-1 bg-primary-container rounded-full animate-bounce"></div>
+            <span class="font-label-sm text-[11px] text-primary tracking-widest uppercase pl-2 font-semibold" id="asmr-caption">Playing: Tab Crack</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- 4. PINTEREST MOODBOARD & AESTHETIC CURATIONS -->
+      <section class="py-space-lg flex flex-col gap-space-md" id="moodboard">
+        <div class="flex items-end justify-between">
+          <div>
+            <span class="font-label-sm text-label-sm uppercase tracking-widest text-primary">Curated Mood</span>
+            <h2 class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface uppercase tracking-tight">The Silver Pinboard</h2>
+          </div>
+          <div class="flex items-center gap-1 bg-surface-container px-3 py-1 rounded-full text-secondary border border-white/5">
+            <span class="material-symbols-outlined text-[16px] text-primary">favorite</span>
+            <span class="font-label-sm text-label-sm text-on-surface">42.8k Pins</span>
+          </div>
+        </div>
+
+        <!-- Editorial Moodboard Staggered Tiles -->
+        <div class="grid grid-cols-2 gap-space-sm items-start">
+          <!-- Pin 1 -->
+          <div class="group flex flex-col rounded-xl overflow-hidden bg-surface-container-low shadow-md relative border border-white/5">
+            <div class="relative overflow-hidden aspect-[3/4]">
+              <img class="w-full h-full object-cover" data-alt="High fashion 90s supermodel runway backstage holding an iced cold Diet Coke can" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAQZPBamMWLOZEzJetUAyLO1a6sWzQXzgE7zQ7BHvgooMKLl36CPxnDn0O7Iu-Du_SVNIvBAdXlUwr7u-_gMCMhIpbeBhG0kyrs4v666fIgNrEGX-qF92FpBGJ0MhkowdmfmgufBFGVMf4EUX8h5ysyBumvacW9mIoAp_wCBJIe-2xLw2nOO-IVPV2PE39lbgiUXemfhf3vIgQtD7lfHjbcSZDXiCYMf0LTHv_tgvS_" alt="Runway Backstage with Diet Coke"/>
+              <button class="absolute top-2 right-2 w-8 h-8 rounded-full bg-surface-container-lowest/70 backdrop-blur-md flex items-center justify-center text-secondary hover:text-primary transition-colors" onclick="togglePin(this)">
+                <span class="material-symbols-outlined text-[16px]">bookmark</span>
+              </button>
+              <span class="absolute bottom-2 left-2 px-2 py-0.5 rounded-full bg-surface-container-lowest/80 text-[10px] font-label-sm uppercase tracking-wider text-on-surface">Archive 1994</span>
+            </div>
+            <div class="p-space-xs flex flex-col gap-0.5">
+              <p class="font-label-sm text-label-sm text-on-surface font-semibold truncate">Backstage Runway Silver</p>
+              <div class="flex items-center justify-between text-[11px] text-secondary">
+                <span>Runway Nostalgia</span>
+                <span class="flex items-center gap-0.5 text-primary"><span class="material-symbols-outlined text-[12px]">favorite</span> 12.4k</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Pin 2 -->
+          <div class="group flex flex-col rounded-xl overflow-hidden bg-surface-container-low shadow-md relative border border-white/5">
+            <div class="relative overflow-hidden aspect-[3/4.5]">
+              <img class="w-full h-full object-cover" data-alt="Minimalist luxury desk flatlay with silver laptop and condensation-covered Diet Coke can" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDYT8WuQCDi60VfwBSZ7HqyzHHlKO6yNj92PRFuBJYWk__QfQTRiD6Vl-Z5ha9zSNYUkWjbwP2GNp_IUT7q70cnbmwwi2JTUM52h5uFHBmfsyXudQS7fOBeQ3mA5Wy244hZBkBitT8KFQ5jJ84cXnjOuz5Hh-X1CVPtv_Kc9EjvCZ-wp-gaq2OfY0XUNMOpWBjSCUEm600yooz1Mzm2Qygh3O5n3xqaLUJU6Q6lSIk4" alt="Desk Ritual with Diet Coke"/>
+              <button class="absolute top-2 right-2 w-8 h-8 rounded-full bg-surface-container-lowest/70 backdrop-blur-md flex items-center justify-center text-secondary hover:text-primary transition-colors" onclick="togglePin(this)">
+                <span class="material-symbols-outlined text-[16px]">bookmark</span>
+              </button>
+              <span class="absolute bottom-2 left-2 px-2 py-0.5 rounded-full bg-surface-container-lowest/80 text-[10px] font-label-sm uppercase tracking-wider text-on-surface">Desk Ritual</span>
+            </div>
+            <div class="p-space-xs flex flex-col gap-0.5">
+              <p class="font-label-sm text-label-sm text-on-surface font-semibold truncate">The 3PM Desk Essential</p>
+              <div class="flex items-center justify-between text-[11px] text-secondary">
+                <span>Deskscape</span>
+                <span class="flex items-center gap-0.5 text-primary"><span class="material-symbols-outlined text-[12px]">favorite</span> 18.9k</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Pin 3 -->
+          <div class="group flex flex-col rounded-xl overflow-hidden bg-surface-container-low shadow-md relative border border-white/5">
+            <div class="relative overflow-hidden aspect-[3/4.2]">
+              <img class="w-full h-full object-cover" data-alt="High gloss futuristic liquid chrome silver nail art hands wrapping softly around a freezing cold Diet Coke can" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBjF0nkzkrM3NYlZmLfnquNrLSJgonBrTSnEpQWVCaMvHyNlwdSdDyDcvA8h-Bi_xlLiuVedD-w546UkUK35ONtP3GGozh342nUDEq5OIOeUPKzf62SYM1dyxQZi0AbKM0wyCuLqE2zd4R47BOSNEkV1Nf0GNUsWkySn8DX8bMXtJnonWM64eSEk5bRX_YbWzNDFtnb4HL8o5S4uyltl4n4GUkyCfv6LMmuHsfyYu4i" alt="Liquid Chrome Nails"/>
+              <button class="absolute top-2 right-2 w-8 h-8 rounded-full bg-surface-container-lowest/70 backdrop-blur-md flex items-center justify-center text-secondary hover:text-primary transition-colors" onclick="togglePin(this)">
+                <span class="material-symbols-outlined text-[16px]">bookmark</span>
+              </button>
+              <span class="absolute bottom-2 left-2 px-2 py-0.5 rounded-full bg-surface-container-lowest/80 text-[10px] font-label-sm uppercase tracking-wider text-on-surface">Chrome Detail</span>
+            </div>
+            <div class="p-space-xs flex flex-col gap-0.5">
+              <p class="font-label-sm text-label-sm text-on-surface font-semibold truncate">Liquid Chrome Nails</p>
+              <div class="flex items-center justify-between text-[11px] text-secondary">
+                <span>Beauty Edit</span>
+                <span class="flex items-center gap-0.5 text-primary"><span class="material-symbols-outlined text-[12px]">favorite</span> 8.7k</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Pin 4 -->
+          <div class="group flex flex-col rounded-xl overflow-hidden bg-surface-container-low shadow-md relative border border-white/5">
+            <div class="relative overflow-hidden aspect-[3/3.8]">
+              <img class="w-full h-full object-cover" data-alt="Golden hour car window sunlight reflection with a cold silver Diet Coke can in cup holder" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBrOOlyVdNGXTxqot_LwYGdtTcldG_-pH4TKi2l_DGcfdziU2LnNOlr9LfIf2XZ1luvxBNlyeDIoR_hFJFHF1KFdkDpe-kjh0qTrrnomjLyKlBhLneLPQX9swIeinJQNThJYnYUldHqHMaeFYjPXY99AhL64lCi3CPjXGH0DiQ5mBWFfDJoSAJpTnwbee-z8xcwR2U3X6qp33p368glLuFDCFtqSmPkCnM4VHlL2lPM" alt="Passenger Princess Ride"/>
+              <button class="absolute top-2 right-2 w-8 h-8 rounded-full bg-surface-container-lowest/70 backdrop-blur-md flex items-center justify-center text-secondary hover:text-primary transition-colors" onclick="togglePin(this)">
+                <span class="material-symbols-outlined text-[16px]">bookmark</span>
+              </button>
+              <span class="absolute bottom-2 left-2 px-2 py-0.5 rounded-full bg-surface-container-lowest/80 text-[10px] font-label-sm uppercase tracking-wider text-on-surface">Golden Hour</span>
+            </div>
+            <div class="p-space-xs flex flex-col gap-0.5">
+              <p class="font-label-sm text-label-sm text-on-surface font-semibold truncate">Passenger Princess Ride</p>
+              <div class="flex items-center justify-between text-[11px] text-secondary">
+                <span>Golden Vibe</span>
+                <span class="flex items-center gap-0.5 text-primary"><span class="material-symbols-outlined text-[12px]">favorite</span> 15.2k</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Moodboard Action Bar -->
+        <button class="w-full py-3 rounded-full bg-surface-container-high text-secondary hover:text-on-surface font-label-sm text-label-sm uppercase tracking-widest flex items-center justify-center gap-2 transition-all border border-white/5 hover:border-white/20" onclick="alert('Moodboard saved to your Pinterest collection!')">
+          <span class="material-symbols-outlined text-[18px]">push_pin</span>
+          Save Moodboard to Pinterest
+        </button>
+      </section>
+
+      <!-- 5. CURATED CULINARY & SNACK PAIRINGS -->
+      <section class="py-space-lg flex flex-col gap-space-md" id="pairings">
+        <div class="flex flex-col">
+          <span class="font-label-sm text-label-sm uppercase tracking-widest text-primary-container">The Gastronomy Suite</span>
+          <h2 class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface uppercase tracking-tight">Art of the Pairing</h2>
+          <p class="font-body-sm text-body-sm text-secondary mt-1">High-contrast flavors elevated by freezing cold carbonation.</p>
+        </div>
+
+        <div class="flex flex-col gap-space-md">
+          <!-- Pairing 1 -->
+          <div class="bg-surface-container rounded-2xl p-space-md flex flex-col gap-space-sm shadow-md border border-white/5">
+            <div class="relative w-full h-44 rounded-xl overflow-hidden">
+              <img class="w-full h-full object-cover" data-alt="Artisanal crispy golden truffle fries with grated parmesan cheese and white truffle aioli" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDQfL6Uwv0sjqTruVQPU427aLoP2Bt6g9sBcsqNPoW8-b7t1o_gPjvy_lxy2CvCruDmp2N-HzV9XSjsqW9dFtMjAVl6U1eYbD_fX-hSfLAfYXvhlllL1ef8SJMhK1KAU1mqub6IhPxw23WMXyJ-s4ny2nxWEWr3JMGwD6FTUM-syv_z0CQckE8W5ubj4YbdVWrW_zJ5_SJMuNcrlQoPKrTy9iHgY6yk3yDeaL6-ORTm" alt="Truffle Fries & Aioli"/>
+              <div class="absolute top-3 left-3 bg-surface-container-lowest/80 backdrop-blur-md px-3 py-1 rounded-full text-primary font-label-sm text-label-sm uppercase tracking-wider">
+                Savory • Salty
+              </div>
+            </div>
+            <div class="flex flex-col">
+              <div class="flex justify-between items-baseline">
+                <h3 class="font-headline-sm text-headline-sm text-on-surface">Crispy Truffle Fries &amp; Aioli</h3>
+                <span class="font-label-sm text-label-sm text-primary uppercase font-semibold">No. 01 Match</span>
+              </div>
+              <p class="font-body-sm text-body-sm text-secondary mt-1 leading-relaxed">
+                The rich, earthy salinity of shaved summer truffle is sliced perfectly in half by the sharp, frosty effervescence of zero-sugar cola.
+              </p>
+            </div>
+          </div>
+
+          <!-- Pairing 2 -->
+          <div class="bg-surface-container rounded-2xl p-space-md flex flex-col gap-space-sm shadow-md border border-white/5">
+            <div class="relative w-full h-44 rounded-xl overflow-hidden">
+              <img class="w-full h-full object-cover" data-alt="Gourmet smash cheeseburger with charred caramelized lace edges" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBUVoaOrYtm1GAkf9st3tagJTv42-uJLECTIDojzDV6SIPaZCrVsUY_pcd9SVt7lqPrDmwc0yuAmWT6Imcg6QKtH9TTB77rcKXF7KdDbqliX1LZsgNIkd2NdlIdNXkMgsBLK4P7DumXgSEA7uFXj2Xu1OzDwNyl9vs2m2cQ8PfJDz7hHhnp7ac77BlWZt-Mvd03nMJH8S8DOFgUjeW7imXoQvPMSL9-0ScLvNjh23o-" alt="Artisanal Smash Burger"/>
+              <div class="absolute top-3 left-3 bg-surface-container-lowest/80 backdrop-blur-md px-3 py-1 rounded-full text-primary-fixed-dim font-label-sm text-label-sm uppercase tracking-wider">
+                Iconic • Rich
+              </div>
+            </div>
+            <div class="flex flex-col">
+              <div class="flex justify-between items-baseline">
+                <h3 class="font-headline-sm text-headline-sm text-on-surface">The Artisanal Smash Burger</h3>
+                <span class="font-label-sm text-label-sm text-secondary uppercase font-semibold">No. 02 Match</span>
+              </div>
+              <p class="font-body-sm text-body-sm text-secondary mt-1 leading-relaxed">
+                Sizzled caramelized meat fat washed clean on every bite. A timeless metropolitan ritual of high-low luxury dining.
+              </p>
+            </div>
+          </div>
+
+          <!-- Pairing 3 -->
+          <div class="bg-surface-container rounded-2xl p-space-md flex flex-col gap-space-sm shadow-md border border-white/5">
+            <div class="relative w-full h-44 rounded-xl overflow-hidden">
+              <img class="w-full h-full object-cover" data-alt="Artisanal dark chocolate slab with flaky sea salt crystals" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCM7UmsVr4SInyVqMzwtDfgr6mo8FWnZdrocEB33WSHdYT_tLN7Bm14d9EL415pjJS-l8bQ3f15ue3D4rJAuxrrl2VihUn3miXSUysNitXz7P_I8iBfZOgRI1C2dibMYpp3FTmCaseAv_SiBLStPTT4uHV4F8u5ar88hVW-J23ly9fNhnvZOLWyIHt_ijGKZ4U5MWwdPRaQIgV1TwzQ_CWJM_YSQAfhNnR_d5RIjRbR" alt="Dark Chocolate & Sea Salt"/>
+              <div class="absolute top-3 left-3 bg-surface-container-lowest/80 backdrop-blur-md px-3 py-1 rounded-full text-secondary font-label-sm text-label-sm uppercase tracking-wider">
+                Decadent • Bitter
+              </div>
+            </div>
+            <div class="flex flex-col">
+              <div class="flex justify-between items-baseline">
+                <h3 class="font-headline-sm text-headline-sm text-on-surface">Dark Chocolate &amp; Sea Salt</h3>
+                <span class="font-label-sm text-label-sm text-primary uppercase font-semibold">No. 03 Match</span>
+              </div>
+              <p class="font-body-sm text-body-sm text-secondary mt-1 leading-relaxed">
+                72% roasted cacao depth harmonizes with caramel-accented cola spices, leaving a crisp, velvety lingering finish.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 6. ORDER THE CHILL / CONCIERGE PACK SELECTOR -->
+      <section class="py-space-lg flex flex-col gap-space-md" id="chill-selector">
+        <div class="flex flex-col text-center items-center">
+          <span class="font-label-sm text-label-sm uppercase tracking-widest text-primary-container">Chilled Express Delivery</span>
+          <h2 class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface uppercase tracking-tight">Concierge Cold Reserve</h2>
+          <p class="font-body-sm text-body-sm text-secondary mt-1 max-w-xs">Packaged in insulated silver cases, delivered at sub-zero drinking temperature.</p>
+        </div>
+
+        <!-- Packs Stack -->
+        <div class="flex flex-col gap-space-sm" id="pack-container">
+          <!-- Pack 1: Selected by default -->
+          <div class="pack-card cursor-pointer p-space-md rounded-2xl bg-surface-container-high ring-2 ring-primary-container flex flex-col gap-space-xs transition-all shadow-lg relative border border-white/5" onclick="selectPack(this)">
+            <div class="flex items-center justify-between">
+              <div class="flex items-center gap-2">
+                <span class="material-symbols-outlined text-primary text-[22px]">view_in_ar</span>
+                <h4 class="font-headline-sm text-headline-sm text-on-surface">The Chic Sleek 6-Pack</h4>
+              </div>
+              <span class="font-headline-sm text-headline-sm text-on-surface font-semibold">$14.00</span>
+            </div>
+            <p class="font-body-sm text-body-sm text-secondary">355ml Slim Can Editions • Pre-frosted inside silver thermal sleeve.</p>
+            <div class="flex items-center justify-between pt-2">
+              <span class="font-label-sm text-[11px] text-primary uppercase tracking-wider">Fast chilled drop in 45 mins</span>
+              <span class="pack-check w-5 h-5 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center">
+                <span class="material-symbols-outlined text-[14px]">check</span>
+              </span>
+            </div>
+          </div>
+
+          <!-- Pack 2 -->
+          <div class="pack-card cursor-pointer p-space-md rounded-2xl bg-surface-container-low flex flex-col gap-space-xs transition-all shadow-sm relative border border-white/5" onclick="selectPack(this)">
+            <div class="flex items-center justify-between">
+              <div class="flex items-center gap-2">
+                <span class="material-symbols-outlined text-secondary text-[22px]">inventory_2</span>
+                <h4 class="font-headline-sm text-headline-sm text-on-surface">Classic 12-Pack Chiller</h4>
+              </div>
+              <span class="font-headline-sm text-headline-sm text-on-surface font-semibold">$24.00</span>
+            </div>
+            <p class="font-body-sm text-body-sm text-secondary">Original heritage dimensions • Packed with dry-ice crystals.</p>
+            <div class="flex items-center justify-between pt-2">
+              <span class="font-label-sm text-[11px] text-secondary uppercase tracking-wider">Standard cold drop</span>
+              <span class="pack-check w-5 h-5 rounded-full bg-surface-container-highest text-secondary flex items-center justify-center">
+                <span class="material-symbols-outlined text-[14px] hidden">check</span>
+              </span>
+            </div>
+          </div>
+
+          <!-- Pack 3: Subscription Case -->
+          <div class="pack-card cursor-pointer p-space-md rounded-2xl bg-surface-container-low flex flex-col gap-space-xs transition-all shadow-sm relative border border-white/5" onclick="selectPack(this)">
+            <div class="flex items-center justify-between">
+              <div class="flex items-center gap-2">
+                <span class="material-symbols-outlined text-secondary text-[22px]">all_inclusive</span>
+                <h4 class="font-headline-sm text-headline-sm text-on-surface">The Silver Subscription</h4>
+              </div>
+              <span class="font-headline-sm text-headline-sm text-on-surface font-semibold">$38.00<span class="text-body-sm font-normal text-secondary">/mo</span></span>
+            </div>
+            <p class="font-body-sm text-body-sm text-secondary">24 Cans bi-weekly + exclusive runway limited can collabs.</p>
+            <div class="flex items-center justify-between pt-2">
+              <span class="font-label-sm text-[11px] text-primary uppercase tracking-wider">Includes VIP Silver Access</span>
+              <span class="pack-check w-5 h-5 rounded-full bg-surface-container-highest text-secondary flex items-center justify-center">
+                <span class="material-symbols-outlined text-[14px] hidden">check</span>
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Add to Bucket Button with Feedback -->
+        <button class="w-full py-4 rounded-full bg-primary-container text-on-primary-container font-label-lg text-label-lg uppercase tracking-widest shadow-xl flex items-center justify-center gap-2 active:scale-[0.98] transition-transform mt-2 hover:opacity-95" onclick="addToBucket(this)">
+          <span class="material-symbols-outlined text-[20px]">ice_skating</span>
+          <span id="bucket-text">Add to Ice Bucket • $14.00</span>
+        </button>
+
+        <div class="flex items-center justify-center gap-2 text-secondary font-label-sm text-label-sm uppercase tracking-wider">
+          <span class="material-symbols-outlined text-[16px] text-primary">local_shipping</span>
+          Zero Temperature Loss Guarantee
+        </div>
+      </section>
+
+      <!-- 7. BRAND MANIFESTO & SILVER CIRCLE SIGNUP -->
+      <footer class="pt-space-lg pb-space-xl flex flex-col items-center text-center gap-space-lg border-t border-white/5 mt-8">
+        <!-- Editorial Quote Manifesto -->
+        <div class="max-w-xs flex flex-col gap-space-xs">
+          <span class="font-display-lg-mobile text-[40px] text-primary leading-none">“</span>
+          <p class="font-display-lg-mobile text-headline-sm uppercase text-on-surface tracking-tight -mt-4">
+            Diet Coke is not just a drink.<br/>
+            <span class="italic text-primary">It’s an attitude.</span>
+          </p>
+          <span class="font-label-sm text-label-sm uppercase tracking-widest text-secondary mt-1">Established 1982 • Forever Unfiltered</span>
+        </div>
+
+        <!-- Join The Silver Circle Newsletter -->
+        <div class="w-full bg-surface-container rounded-2xl p-space-md flex flex-col gap-space-sm text-left border border-white/5">
+          <div class="flex items-center gap-2">
+            <span class="material-symbols-outlined text-primary text-[20px]">mark_email_read</span>
+            <span class="font-label-sm text-label-sm uppercase tracking-widest text-on-surface">The Silver Circle</span>
+          </div>
+          <h4 class="font-headline-sm text-headline-sm text-on-surface">Be the first to access drops &amp; fashion collabs.</h4>
+          <div class="flex flex-col gap-2 mt-1">
+            <div class="relative w-full">
+              <input class="w-full px-4 py-3 rounded-xl bg-surface-container-lowest text-on-surface placeholder:text-secondary font-body-sm text-body-sm outline-none focus:ring-1 focus:ring-primary-container transition-all border border-white/5" placeholder="enter your email address..." type="email"/>
+            </div>
+            <button class="w-full py-3 rounded-xl bg-surface-container-highest text-on-surface font-label-lg text-label-lg uppercase tracking-wider hover:bg-primary-container hover:text-on-primary-container transition-all" onclick="handleSubscribe(this)">
+              Join The Circle
+            </button>
+          </div>
+          <span class="font-label-sm text-[11px] text-secondary">Zero spam. Pure crisp updates. Unsubscribe anytime.</span>
+        </div>
+
+        <!-- Social Editorial Grid Links -->
+        <div class="flex items-center justify-center gap-space-md">
+          <a aria-label="Pinterest" class="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center text-secondary hover:text-on-surface transition-colors border border-white/5" href="#">
+            <span class="material-symbols-outlined text-[20px]">push_pin</span>
+          </a>
+          <a aria-label="Instagram" class="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center text-secondary hover:text-on-surface transition-colors border border-white/5" href="#">
+            <span class="material-symbols-outlined text-[20px]">photo_camera</span>
+          </a>
+          <a aria-label="TikTok" class="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center text-secondary hover:text-on-surface transition-colors border border-white/5" href="#">
+            <span class="material-symbols-outlined text-[20px]">music_note</span>
+          </a>
+          <a aria-label="Share" class="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center text-secondary hover:text-on-surface transition-colors border border-white/5" href="#">
+            <span class="material-symbols-outlined text-[20px]">share</span>
+          </a>
+        </div>
+
+        <!-- Legal Disclaimers -->
+        <div class="flex flex-col gap-1 text-[11px] text-secondary/60 font-body-sm max-w-xs">
+          <p>© 2025 The Coca-Cola Company. All Rights Reserved.</p>
+          <p>Diet Coke is a registered trademark of The Coca-Cola Company. Zero sugars, zero calories per serving.</p>
+        </div>
+      </footer>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

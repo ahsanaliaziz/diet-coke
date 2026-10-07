@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"/><meta content="mobile_tab" name="shell-type"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;0,6..96,600;1,6..96,400&amp;family=Hanken+Grotesk:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "secondary": "#c3c7cd", "inverse-primary": "#bf0029", "inverse-on-surface": "#303032", "on-primary-fixed-variant": "#92001d", "on-tertiary-fixed-variant": "#414750", "primary": "#ffb3b1", "secondary-fixed-dim": "#c3c7cd", "background": "#131315", "on-error": "#690005", "surface-bright": "#39393b", "primary-container": "#e31837", "on-background": "#e5e1e4", "secondary-container": "#454a4f", "tertiary": "#c1c7d1", "surface": "#131315", "inverse-surface": "#e5e1e4", "surface-tint": "#ffb3b1", "surface-container-lowest": "#0e0e10", "on-tertiary-fixed": "#161c24", "on-error-container": "#ffdad6", "surface-container-highest": "#353437", "on-secondary-fixed-variant": "#43474c", "surface-container": "#201f21", "tertiary-fixed": "#dde3ee", "error-container": "#93000a", "outline-variant": "#5d3f3e", "on-primary-fixed": "#410007", "on-secondary-fixed": "#171c20", "on-tertiary-container": "#fafaff", "error": "#ffb4ab", "on-secondary": "#2c3136", "surface-dim": "#131315", "outline": "#ad8886", "surface-variant": "#353437", "secondary-fixed": "#dfe3e9", "on-surface": "#e5e1e4", "on-tertiary": "#2b3139", "on-primary-container": "#fffaf9", "tertiary-container": "#6e747e", "surface-container-low": "#1b1b1d", "tertiary-fixed-dim": "#c1c7d1", "surface-container-high": "#2a2a2c", "on-surface-variant": "#e6bdbb", "primary-fixed": "#ffdad8", "primary-fixed-dim": "#ffb3b1", "on-secondary-container": "#b4b9bf", "on-primary": "#680011" }, "borderRadius": { "DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem" }, "spacing": { "space-lg": "2rem", "gutter": "1.5rem", "margin": "4rem", "gutter-mobile": "1rem", "space-md": "1rem", "margin-mobile": "1.25rem", "space-xs": "0.25rem", "space-xl": "3.5rem", "space-sm": "0.5rem" }, "fontFamily": { "body-sm": ["Hanken Grotesk"], "display-lg": ["Bodoni Moda"], "headline-sm": ["Bodoni Moda"], "body-md": ["Hanken Grotesk"], "headline-md": ["Bodoni Moda"], "body-lg": ["Hanken Grotesk"], "label-md": ["Hanken Grotesk"], "label-lg": ["Hanken Grotesk"], "headline-lg-mobile": ["Bodoni Moda"], "headline-lg": ["Bodoni Moda"], "label-sm": ["Hanken Grotesk"], "display-lg-mobile": ["Bodoni Moda"], "display-xl-mobile": ["Bodoni Moda"], "display-xl": ["Bodoni Moda"] }, "fontSize": { "body-sm": ["13px", { "lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "400" }], "display-lg": ["56px", { "lineHeight": "62px", "letterSpacing": "-0.025em", "fontWeight": "500" }], "headline-sm": ["22px", { "lineHeight": "28px", "letterSpacing": "0em", "fontWeight": "400" }], "body-md": ["15px", { "lineHeight": "24px", "letterSpacing": "0em", "fontWeight": "400" }], "headline-md": ["28px", { "lineHeight": "34px", "letterSpacing": "-0.01em", "fontWeight": "400" }], "body-lg": ["18px", { "lineHeight": "28px", "letterSpacing": "-0.01em", "fontWeight": "400" }], "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.08em", "fontWeight": "500" }], "label-lg": ["14px", { "lineHeight": "20px", "letterSpacing": "0.06em", "fontWeight": "600" }], "headline-lg-mobile": ["28px", { "lineHeight": "34px", "letterSpacing": "-0.01em", "fontWeight": "500" }], "headline-lg": ["40px", { "lineHeight": "46px", "letterSpacing": "-0.02em", "fontWeight": "500" }], "label-sm": ["10px", { "lineHeight": "14px", "letterSpacing": "0.12em", "fontWeight": "600" }], "display-lg-mobile": ["36px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "500" }], "display-xl-mobile": ["44px", { "lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "600" }], "display-xl": ["72px", { "lineHeight": "78px", "letterSpacing": "-0.03em", "fontWeight": "600" }] } } } };</script><style>@layer base{html,body{width:100vw;margin:0;padding:0;}body{overscroll-behavior:none;}.pb-safe{padding-bottom:env(safe-area-inset-bottom,0px);}.pt-safe{padding-top:env(safe-area-inset-top,0px);}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style></head><body class="bg-surface text-on-surface font-body-md text-body-md min-h-screen flex flex-col antialiased selection:bg-primary-container selection:text-on-primary-container"><header class="fixed top-0 w-full z-50 pt-safe bg-surface/75 backdrop-blur-xl shadow-[0_1px_16px_rgba(0,0,0,0.4)]"><div class="h-16 px-margin-mobile flex items-center justify-between"><div class="flex items-center gap-space-sm"><button aria-label="Open Menu Drawer" class="w-11 h-11 flex items-center justify-center text-secondary hover:text-on-surface transition-colors"><span class="material-symbols-outlined text-[22px]">notes</span></button><div class="flex items-center gap-space-xs pl-space-xs"><span class="font-display-lg-mobile text-headline-sm uppercase tracking-tight text-on-surface select-none">Diet Coke</span><span class="w-1.5 h-1.5 rounded-full bg-primary-container animate-pulse"></span></div></div><div class="flex items-center gap-space-sm"><span class="hidden font-label-sm text-label-sm uppercase tracking-wider text-secondary">Taste</span><img alt="Profile" class="w-8 h-8 rounded-full object-cover ring-1 ring-white/20" src="https://lh3.googleusercontent.com/aida/AEtjO1UHBooPNRKZ3YqFlUyPAevXBeC093mbRIkgy4swklp-dkKqOzmuPIAuMdV8N9r3hUZAM48v3tFYY9nkHyIzBJswUk0fljW4Qt5-k9XSBmtWDHD3COYKEGT_ruLCUh3DbsNHscxRmt-D_FmgngYocCJ1JeoFqI7mXdWkCHrh3kBq0g5Bl4GuUlvHMFJz5hc6-drRqdjPo4g5WpnmjJLIw4tz_LaniD6Ob82tHw4gqb7f"/></div></div></header><main class="flex-1 flex flex-col relative w-full pt-16 pb-24 bg-surface min-h-screen"><div class="flex flex-col w-full text-on-surface">
+<!-- AMBIENT BACKDROP LIGHT GLOW -->
+<div class="relative w-full overflow-hidden">
+<div class="absolute -top-32 left-1/2 -translate-x-1/2 w-[340px] h-[340px] bg-primary-container/15 rounded-full blur-[110px] pointer-events-none"></div>
+<div class="absolute top-96 -right-24 w-64 h-64 bg-secondary/10 rounded-full blur-[90px] pointer-events-none"></div>
+<!-- 1. HERO EDITORIAL SHOWCASE -->
+<section class="relative px-margin-mobile pt-space-md pb-space-lg flex flex-col items-center text-center">
+<!-- High-Fashion Floating Chip -->
+<div class="inline-flex items-center gap-space-xs px-3.5 py-1 rounded-full bg-surface-container-high/80 backdrop-blur-md shadow-sm mb-space-sm">
+<span class="w-2 h-2 rounded-full bg-primary-container animate-ping"></span>
+<span class="font-label-sm text-label-sm uppercase tracking-widest text-primary-fixed">The Silver Aesthetic • Vol. 82</span>
+</div>
+<!-- Editorial Typography Header -->
+<h1 class="font-display-lg-mobile text-display-lg-mobile tracking-tight text-on-surface uppercase mb-space-xs leading-[1.08]">
+        THAT CRISP<br/>
+<span class="font-display-lg-mobile italic font-normal tracking-normal text-primary">FIRST SIP</span>
+</h1>
+<p class="font-body-md text-body-md text-secondary max-w-xs mb-space-md">
+        Sub-zero effervescence. Zero sugar. Pure silver attitude. The defining cold-can culture icon.
+      </p>
+<!-- HERO CAN PRESENTATION WITH GLOWING HALO & FLOATING METRIC CARDS -->
+<div class="relative w-full max-w-sm my-space-xs flex justify-center items-center">
+<!-- Radial Silver Light Scrim -->
+<div class="absolute inset-4 rounded-full bg-gradient-to-b from-secondary/20 via-primary-container/10 to-transparent blur-2xl -z-10"></div>
+<!-- The Uploaded Hero Can Image -->
+<div class="relative w-full rounded-2xl overflow-hidden shadow-2xl bg-surface-container-lowest flex justify-center">
+<img alt="Ice-cold frosted Diet Coke can with ambient condensation and crystal ice cubes" class="w-full object-cover max-h-[480px] drop-shadow-2xl" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAenuYSlx8bbp8QQaaDyqrhRW00Md7L6vc1Hf3hVmjRhJj0dzvAMR8YDrgJL_pSRC3j_UBexiqvin_phrr_WR_BdS91yXJ_B0XItJpIwqjph4iDK24xA6uqvh-mjMK5LgWuPQ3-Pb1iOq1BD3om8bJ4ntmOS3c-PK41466fN-5jMWEZVVomCmBZuiwtCcSsDAzj16qSOw5VGKMP7wD_PvUaU2z7cZDQAYgxholWmyrmeJTY0XV5jBHLCw"/>
+<!-- Gloss Reflection Overlay -->
+<div class="absolute inset-0 bg-gradient-to-t from-surface via-transparent to-white/10 pointer-events-none"></div>
+<!-- Floating Frost Metric Badge: Top Left -->
+<div class="absolute top-4 left-4 backdrop-blur-xl bg-surface-container-lowest/80 px-3 py-1.5 rounded-full flex items-center gap-1.5 shadow-md">
+<span class="material-symbols-outlined text-[15px] text-primary">ac_unit</span>
+<span class="font-label-sm text-label-sm tracking-wider text-on-surface uppercase">Best Served at 3°C</span>
+</div>
+<!-- Floating Stat Badge: Bottom Right -->
+<div class="absolute bottom-4 right-4 backdrop-blur-xl bg-surface-container-lowest/80 px-3 py-1.5 rounded-full flex items-center gap-1.5 shadow-md">
+<span class="w-1.5 h-1.5 rounded-full bg-primary-container"></span>
+<span class="font-label-sm text-label-sm tracking-wider text-secondary uppercase">0 Sugar • 46mg Caffeine</span>
+</div>
+</div>
+</div>
+<!-- Action Buttons -->
+<div class="w-full max-w-xs flex flex-col gap-space-xs mt-space-md">
+<a class="w-full py-3.5 px-6 rounded-full bg-primary-container text-on-primary-container font-label-lg text-label-lg uppercase tracking-wider shadow-lg flex items-center justify-center gap-2 hover:opacity-95 transition-all active:scale-[0.98]" href="#chill-selector">
+<span class="material-symbols-outlined text-[20px]">local_drink</span>
+          Taste The Chill
+        </a>
+<a class="w-full py-3 px-6 rounded-full bg-surface-container-high/60 backdrop-blur-lg text-secondary font-label-lg text-label-lg uppercase tracking-wider flex items-center justify-center gap-2 hover:text-on-surface transition-colors" href="#moodboard">
+<span class="material-symbols-outlined text-[18px]">photo_library</span>
+          Explore Moodboard
+        </a>
+</div>
+<!-- Quick Sensory Micro-Chips -->
+<div class="flex items-center justify-center gap-space-xs mt-space-md flex-wrap">
+<span class="px-3 py-1 rounded-full bg-surface-container text-secondary font-label-sm text-label-sm uppercase tracking-widest">0g Sugar</span>
+<span class="px-3 py-1 rounded-full bg-surface-container text-secondary font-label-sm text-label-sm uppercase tracking-widest">0 Calories</span>
+<span class="px-3 py-1 rounded-full bg-surface-container-high text-primary font-label-sm text-label-sm uppercase tracking-widest">100% Unapologetic</span>
+</div>
+</section>
+<!-- 2. THE ANATOMY OF CRISPNESS -->
+<section class="px-margin-mobile py-space-lg flex flex-col gap-space-md">
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm uppercase tracking-widest text-primary-container">Sensory Engineering</span>
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface uppercase tracking-tight">The Anatomy of Crispness</h2>
+<p class="font-body-sm text-body-sm text-secondary mt-1">Why nothing hits the tongue quite like an iced silver can.</p>
+</div>
+<!-- Sensory Feature Cards -->
+<div class="flex flex-col gap-space-sm">
+<!-- Feature 1 -->
+<div class="bg-surface-container-low rounded-xl p-space-md flex gap-space-md items-start shadow-sm">
+<div class="w-12 h-12 rounded-lg bg-surface-container-highest flex items-center justify-center text-primary shrink-0 shadow-inner">
+<span class="material-symbols-outlined text-[26px]">thermometer_gain</span>
+</div>
+<div class="flex flex-col min-w-0">
+<div class="flex items-center justify-between">
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Sub-Zero Temperature</h3>
+<span class="font-label-sm text-label-sm text-primary uppercase">35°F Optimum</span>
+</div>
+<p class="font-body-sm text-body-sm text-secondary mt-1 leading-relaxed">
+              Precision chilling crystallizes surface droplets on polished aluminum, priming each molecule for the ultimate thermal snap.
+            </p>
+</div>
+</div>
+<!-- Feature 2 -->
+<div class="bg-surface-container-low rounded-xl p-space-md flex gap-space-md items-start shadow-sm">
+<div class="w-12 h-12 rounded-lg bg-surface-container-highest flex items-center justify-center text-primary-fixed-dim shrink-0 shadow-inner">
+<span class="material-symbols-outlined text-[26px]">grain</span>
+</div>
+<div class="flex flex-col min-w-0">
+<div class="flex items-center justify-between">
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Vibrant Effervescence</h3>
+<span class="font-label-sm text-label-sm text-secondary uppercase">Micro-Bubbles</span>
+</div>
+<p class="font-body-sm text-body-sm text-secondary mt-1 leading-relaxed">
+              Tightly bound carbonation engineered to awaken sensory receptors instantly, tingling through the palate with zero lingering drag.
+            </p>
+</div>
+</div>
+<!-- Feature 3 -->
+<div class="bg-surface-container-low rounded-xl p-space-md flex gap-space-md items-start shadow-sm">
+<div class="w-12 h-12 rounded-lg bg-surface-container-highest flex items-center justify-center text-primary shrink-0 shadow-inner">
+<span class="material-symbols-outlined text-[26px]">star</span>
+</div>
+<div class="flex flex-col min-w-0">
+<div class="flex items-center justify-between">
+<h3 class="font-headline-sm text-headline-sm text-on-surface">The Silver Finish</h3>
+<span class="font-label-sm text-label-sm text-primary uppercase">Signature Note</span>
+</div>
+<p class="font-body-sm text-body-sm text-secondary mt-1 leading-relaxed">
+              A distinctive, ultra-clean bite that refreshes without heaviness. An iconic, laser-focused profile that has defined pop culture.
+            </p>
+</div>
+</div>
+</div>
+</section>
+<!-- 3. SOUND OF CHILL (SENSORY ASMR RITUAL) -->
+<section class="px-margin-mobile py-space-md">
+<div class="w-full bg-gradient-to-br from-surface-container-high to-surface-container-low rounded-2xl p-space-md shadow-xl flex flex-col gap-space-sm relative overflow-hidden">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary-container text-[20px] animate-pulse">graphic_eq</span>
+<span class="font-label-sm text-label-sm uppercase tracking-widest text-on-surface">Sensory Audio Ritual</span>
+</div>
+<span class="font-label-sm text-label-sm text-secondary">3 Stages</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface">The Audio Anatomy of Chill</h3>
+<p class="font-body-sm text-body-sm text-secondary">Tap each trigger to preview the iconic cadence of popping an icy can.</p>
+<!-- Waveform Selector Tabs -->
+<div class="grid grid-cols-3 gap-2 mt-space-xs" id="asmr-controller">
+<button class="asmr-btn p-3 rounded-xl bg-surface-container-highest text-left transition-all active:scale-95 flex flex-col justify-between h-24" onclick="playTrigger(0, this)">
+<span class="material-symbols-outlined text-primary text-[22px]">eject</span>
+<div>
+<p class="font-label-sm text-label-sm text-on-surface font-semibold leading-tight">The Tab Crack</p>
+<span class="font-body-sm text-[11px] text-secondary">0:01 Snap</span>
+</div>
+</button>
+<button class="asmr-btn p-3 rounded-xl bg-surface-container text-left transition-all active:scale-95 flex flex-col justify-between h-24" onclick="playTrigger(1, this)">
+<span class="material-symbols-outlined text-secondary text-[22px]">water_drop</span>
+<div>
+<p class="font-label-sm text-label-sm text-on-surface font-semibold leading-tight">Micro-Fizz</p>
+<span class="font-body-sm text-[11px] text-secondary">0:03 Hiss</span>
+</div>
+</button>
+<button class="asmr-btn p-3 rounded-xl bg-surface-container text-left transition-all active:scale-95 flex flex-col justify-between h-24" onclick="playTrigger(2, this)">
+<span class="material-symbols-outlined text-secondary text-[22px]">icecream</span>
+<div>
+<p class="font-label-sm text-label-sm text-on-surface font-semibold leading-tight">Clinking Ice</p>
+<span class="font-body-sm text-[11px] text-secondary">0:02 Tumble</span>
+</div>
+</button>
+</div>
+<!-- Waveform Visualizer Display -->
+<div class="mt-space-xs bg-surface-container-lowest/80 p-3 rounded-xl flex items-center justify-between gap-1 h-14 px-4">
+<div class="h-4 w-1 bg-primary-container rounded-full animate-pulse"></div>
+<div class="h-7 w-1 bg-primary rounded-full animate-bounce"></div>
+<div class="h-10 w-1 bg-white rounded-full animate-pulse"></div>
+<div class="h-5 w-1 bg-primary-container rounded-full animate-bounce"></div>
+<div class="h-8 w-1 bg-primary rounded-full animate-pulse"></div>
+<div class="h-3 w-1 bg-secondary rounded-full animate-bounce"></div>
+<div class="h-9 w-1 bg-white rounded-full animate-pulse"></div>
+<div class="h-6 w-1 bg-primary-container rounded-full animate-bounce"></div>
+<div class="h-10 w-1 bg-primary rounded-full animate-pulse"></div>
+<div class="h-4 w-1 bg-secondary rounded-full animate-bounce"></div>
+<div class="h-8 w-1 bg-white rounded-full animate-pulse"></div>
+<div class="h-5 w-1 bg-primary-container rounded-full animate-bounce"></div>
+<span class="font-label-sm text-[11px] text-primary tracking-widest uppercase pl-2" id="asmr-caption">Playing: Tab Crack</span>
+</div>
+</div>
+</section>
+<!-- 4. PINTEREST MOODBOARD & AESTHETIC CURATIONS -->
+<section class="px-margin-mobile py-space-lg flex flex-col gap-space-md" id="moodboard">
+<div class="flex items-end justify-between">
+<div>
+<span class="font-label-sm text-label-sm uppercase tracking-widest text-primary">Curated Mood</span>
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface uppercase tracking-tight">The Silver Pinboard</h2>
+</div>
+<div class="flex items-center gap-1 bg-surface-container px-3 py-1 rounded-full text-secondary">
+<span class="material-symbols-outlined text-[16px] text-primary">favorite</span>
+<span class="font-label-sm text-label-sm text-on-surface">42.8k Pins</span>
+</div>
+</div>
+<!-- Editorial Moodboard Staggered Tiles -->
+<div class="grid grid-cols-2 gap-space-sm items-start">
+<!-- Pin 1 -->
+<div class="group flex flex-col rounded-xl overflow-hidden bg-surface-container-low shadow-md relative">
+<div class="relative overflow-hidden aspect-[3/4]">
+<img class="w-full h-full object-cover" data-alt="High fashion 90s supermodel runway backstage with natural lighting, silver chrome sunglasses, holding an iced cold Diet Coke can, candid analog grain film aesthetic, moody editorial studio lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAQZPBamMWLOZEzJetUAyLO1a6sWzQXzgE7zQ7BHvgooMKLl36CPxnDn0O7Iu-Du_SVNIvBAdXlUwr7u-_gMCMhIpbeBhG0kyrs4v666fIgNrEGX-qF92FpBGJ0MhkowdmfmgufBFGVMf4EUX8h5ysyBumvacW9mIoAp_wCBJIe-2xLw2nOO-IVPV2PE39lbgiUXemfhf3vIgQtD7lfHjbcSZDXiCYMf0LTHv_tgvS_"/>
+<button class="absolute top-2 right-2 w-8 h-8 rounded-full bg-surface-container-lowest/70 backdrop-blur-md flex items-center justify-center text-secondary hover:text-primary transition-colors" onclick="togglePin(this)">
+<span class="material-symbols-outlined text-[16px]">bookmark</span>
+</button>
+<span class="absolute bottom-2 left-2 px-2 py-0.5 rounded-full bg-surface-container-lowest/80 text-[10px] font-label-sm uppercase tracking-wider text-on-surface">Archive 1994</span>
+</div>
+<div class="p-space-xs flex flex-col gap-0.5">
+<p class="font-label-sm text-label-sm text-on-surface font-semibold truncate">Backstage Runway Silver</p>
+<div class="flex items-center justify-between text-[11px] text-secondary">
+<span>Runway Nostalgia</span>
+<span class="flex items-center gap-0.5 text-primary"><span class="material-symbols-outlined text-[12px]">favorite</span> 12.4k</span>
+</div>
+</div>
+</div>
+<!-- Pin 2 -->
+<div class="group flex flex-col rounded-xl overflow-hidden bg-surface-container-low shadow-md relative">
+<div class="relative overflow-hidden aspect-[3/4.5]">
+<img class="w-full h-full object-cover" data-alt="Minimalist luxury desk flatlay with silver aluminum laptop, glossy pink lip balm tube, sleek notebook, and condensation-covered Diet Coke can over dark matte marble surface, editorial magazine aesthetic" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDYT8WuQCDi60VfwBSZ7HqyzHHlKO6yNj92PRFuBJYWk__QfQTRiD6Vl-Z5ha9zSNYUkWjbwP2GNp_IUT7q70cnbmwwi2JTUM52h5uFHBmfsyXudQS7fOBeQ3mA5Wy244hZBkBitT8KFQ5jJ84cXnjOuz5Hh-X1CVPtv_Kc9EjvCZ-wp-gaq2OfY0XUNMOpWBjSCUEm600yooz1Mzm2Qygh3O5n3xqaLUJU6Q6lSIk4"/>
+<button class="absolute top-2 right-2 w-8 h-8 rounded-full bg-surface-container-lowest/70 backdrop-blur-md flex items-center justify-center text-secondary hover:text-primary transition-colors" onclick="togglePin(this)">
+<span class="material-symbols-outlined text-[16px]">bookmark</span>
+</button>
+<span class="absolute bottom-2 left-2 px-2 py-0.5 rounded-full bg-surface-container-lowest/80 text-[10px] font-label-sm uppercase tracking-wider text-on-surface">Desk Ritual</span>
+</div>
+<div class="p-space-xs flex flex-col gap-0.5">
+<p class="font-label-sm text-label-sm text-on-surface font-semibold truncate">The 3PM Desk Essential</p>
+<div class="flex items-center justify-between text-[11px] text-secondary">
+<span>Deskscape</span>
+<span class="flex items-center gap-0.5 text-primary"><span class="material-symbols-outlined text-[12px]">favorite</span> 18.9k</span>
+</div>
+</div>
+</div>
+<!-- Pin 3 -->
+<div class="group flex flex-col rounded-xl overflow-hidden bg-surface-container-low shadow-md relative">
+<div class="relative overflow-hidden aspect-[3/4.2]">
+<img class="w-full h-full object-cover" data-alt="High gloss futuristic liquid chrome silver nail art hands wrapping softly around a freezing cold condensation dripped Diet Coke can, dark noir aesthetic with crimson red highlights" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBjF0nkzkrM3NYlZmLfnquNrLSJgonBrTSnEpQWVCaMvHyNlwdSdDyDcvA8h-Bi_xlLiuVedD-w546UkUK35ONtP3GGozh342nUDEq5OIOeUPKzf62SYM1dyxQZi0AbKM0wyCuLqE2zd4R47BOSNEkV1Nf0GNUsWkySn8DX8bMXtJnonWM64eSEk5bRX_YbWzNDFtnb4HL8o5S4uyltl4n4GUkyCfv6LMmuHsfyYu4i"/>
+<button class="absolute top-2 right-2 w-8 h-8 rounded-full bg-surface-container-lowest/70 backdrop-blur-md flex items-center justify-center text-secondary hover:text-primary transition-colors" onclick="togglePin(this)">
+<span class="material-symbols-outlined text-[16px]">bookmark</span>
+</button>
+<span class="absolute bottom-2 left-2 px-2 py-0.5 rounded-full bg-surface-container-lowest/80 text-[10px] font-label-sm uppercase tracking-wider text-on-surface">Chrome Detail</span>
+</div>
+<div class="p-space-xs flex flex-col gap-0.5">
+<p class="font-label-sm text-label-sm text-on-surface font-semibold truncate">Liquid Chrome Nails</p>
+<div class="flex items-center justify-between text-[11px] text-secondary">
+<span>Beauty Edit</span>
+<span class="flex items-center gap-0.5 text-primary"><span class="material-symbols-outlined text-[12px]">favorite</span> 8.7k</span>
+</div>
+</div>
+</div>
+<!-- Pin 4 -->
+<div class="group flex flex-col rounded-xl overflow-hidden bg-surface-container-low shadow-md relative">
+<div class="relative overflow-hidden aspect-[3/3.8]">
+<img class="w-full h-full object-cover" data-alt="Golden hour car window sunlight reflection with a cold silver Diet Coke can sitting in cup holder on a luxury leather vehicle interior, cinematic mood, sunglasses nearby" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBrOOlyVdNGXTxqot_LwYGdtTcldG_-pH4TKi2l_DGcfdziU2LnNOlr9LfIf2XZ1luvxBNlyeDIoR_hFJFHF1KFdkDpe-kjh0qTrrnomjLyKlBhLneLPQX9swIeinJQNThJYnYUldHqHMaeFYjPXY99AhL64lCi3CPjXGH0DiQ5mBWFfDJoSAJpTnwbee-z8xcwR2U3X6qp33p368glLuFDCFtqSmPkCnM4VHlL2lPM"/>
+<button class="absolute top-2 right-2 w-8 h-8 rounded-full bg-surface-container-lowest/70 backdrop-blur-md flex items-center justify-center text-secondary hover:text-primary transition-colors" onclick="togglePin(this)">
+<span class="material-symbols-outlined text-[16px]">bookmark</span>
+</button>
+<span class="absolute bottom-2 left-2 px-2 py-0.5 rounded-full bg-surface-container-lowest/80 text-[10px] font-label-sm uppercase tracking-wider text-on-surface">Golden Hour</span>
+</div>
+<div class="p-space-xs flex flex-col gap-0.5">
+<p class="font-label-sm text-label-sm text-on-surface font-semibold truncate">Passenger Princess Ride</p>
+<div class="flex items-center justify-between text-[11px] text-secondary">
+<span>Golden Vibe</span>
+<span class="flex items-center gap-0.5 text-primary"><span class="material-symbols-outlined text-[12px]">favorite</span> 15.2k</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Moodboard Action Bar -->
+<button class="w-full py-3 rounded-full bg-surface-container-high text-secondary hover:text-on-surface font-label-sm text-label-sm uppercase tracking-widest flex items-center justify-center gap-2 transition-all">
+<span class="material-symbols-outlined text-[18px]">push_pin</span>
+        Save Moodboard to Pinterest
+      </button>
+</section>
+<!-- 5. CURATED CULINARY & SNACK PAIRINGS -->
+<section class="px-margin-mobile py-space-lg flex flex-col gap-space-md bg-surface-container-lowest">
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm uppercase tracking-widest text-primary-container">The Gastronomy Suite</span>
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface uppercase tracking-tight">Art of the Pairing</h2>
+<p class="font-body-sm text-body-sm text-secondary mt-1">High-contrast flavors elevated by freezing cold carbonation.</p>
+</div>
+<div class="flex flex-col gap-space-md">
+<!-- Pairing 1 -->
+<div class="bg-surface-container rounded-2xl p-space-md flex flex-col gap-space-sm shadow-md">
+<div class="relative w-full h-44 rounded-xl overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Artisanal crispy golden truffle fries with grated parmesan cheese and white truffle aioli dipping sauce in a sleek dark ceramic dish, high-fashion food photography styling, dramatic contrast" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDQfL6Uwv0sjqTruVQPU427aLoP2Bt6g9sBcsqNPoW8-b7t1o_gPjvy_lxy2CvCruDmp2N-HzV9XSjsqW9dFtMjAVl6U1eYbD_fX-hSfLAfYXvhlllL1ef8SJMhK1KAU1mqub6IhPxw23WMXyJ-s4ny2nxWEWr3JMGwD6FTUM-syv_z0CQckE8W5ubj4YbdVWrW_zJ5_SJMuNcrlQoPKrTy9iHgY6yk3yDeaL6-ORTm"/>
+<div class="absolute top-3 left-3 bg-surface-container-lowest/80 backdrop-blur-md px-3 py-1 rounded-full text-primary font-label-sm text-label-sm uppercase tracking-wider">
+              Savory • Salty
+            </div>
+</div>
+<div class="flex flex-col">
+<div class="flex justify-between items-baseline">
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Crispy Truffle Fries &amp; Aioli</h3>
+<span class="font-label-sm text-label-sm text-primary uppercase">No. 01 Match</span>
+</div>
+<p class="font-body-sm text-body-sm text-secondary mt-1 leading-relaxed">
+              The rich, earthy salinity of shaved summer truffle is sliced perfectly in half by the sharp, frosty effervescence of zero-sugar cola.
+            </p>
+</div>
+</div>
+<!-- Pairing 2 -->
+<div class="bg-surface-container rounded-2xl p-space-md flex flex-col gap-space-sm shadow-md">
+<div class="relative w-full h-44 rounded-xl overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Gourmet smash cheeseburger with charred caramelized lace edges, melted sharp cheddar, glossy toasted brioche bun, moody dark background with dramatic studio rim lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBUVoaOrYtm1GAkf9st3tagJTv42-uJLECTIDojzDV6SIPaZCrVsUY_pcd9SVt7lqPrDmwc0yuAmWT6Imcg6QKtH9TTB77rcKXF7KdDbqliX1LZsgNIkd2NdlIdNXkMgsBLK4P7DumXgSEA7uFXj2Xu1OzDwNyl9vs2m2cQ8PfJDz7hHhnp7ac77BlWZt-Mvd03nMJH8S8DOFgUjeW7imXoQvPMSL9-0ScLvNjh23o-"/>
+<div class="absolute top-3 left-3 bg-surface-container-lowest/80 backdrop-blur-md px-3 py-1 rounded-full text-primary-fixed-dim font-label-sm text-label-sm uppercase tracking-wider">
+              Iconic • Rich
+            </div>
+</div>
+<div class="flex flex-col">
+<div class="flex justify-between items-baseline">
+<h3 class="font-headline-sm text-headline-sm text-on-surface">The Artisanal Smash Burger</h3>
+<span class="font-label-sm text-label-sm text-secondary uppercase">No. 02 Match</span>
+</div>
+<p class="font-body-sm text-body-sm text-secondary mt-1 leading-relaxed">
+              Sizzled caramelized meat fat washed clean on every bite. A timeless metropolitan ritual of high-low luxury dining.
+            </p>
+</div>
+</div>
+<!-- Pairing 3 -->
+<div class="bg-surface-container rounded-2xl p-space-md flex flex-col gap-space-sm shadow-md">
+<div class="relative w-full h-44 rounded-xl overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Artisanal dark chocolate slab with flaky sea salt crystals broken gracefully on dark slate stone surface, luxury chocolate confection aesthetic with moody chiaroscuro lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCM7UmsVr4SInyVqMzwtDfgr6mo8FWnZdrocEB33WSHdYT_tLN7Bm14d9EL415pjJS-l8bQ3f15ue3D4rJAuxrrl2VihUn3miXSUysNitXz7P_I8iBfZOgRI1C2dibMYpp3FTmCaseAv_SiBLStPTT4uHV4F8u5ar88hVW-J23ly9fNhnvZOLWyIHt_ijGKZ4U5MWwdPRaQIgV1TwzQ_CWJM_YSQAfhNnR_d5RIjRbR"/>
+<div class="absolute top-3 left-3 bg-surface-container-lowest/80 backdrop-blur-md px-3 py-1 rounded-full text-secondary font-label-sm text-label-sm uppercase tracking-wider">
+              Decadent • Bitter
+            </div>
+</div>
+<div class="flex flex-col">
+<div class="flex justify-between items-baseline">
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Dark Chocolate &amp; Sea Salt</h3>
+<span class="font-label-sm text-label-sm text-primary uppercase">No. 03 Match</span>
+</div>
+<p class="font-body-sm text-body-sm text-secondary mt-1 leading-relaxed">
+              72% roasted cacao depth harmonizes with caramel-accented cola spices, leaving a crisp, velvety lingering finish.
+            </p>
+</div>
+</div>
+</div>
+</section>
+<!-- 6. ORDER THE CHILL / CONCIERGE PACK SELECTOR -->
+<section class="px-margin-mobile py-space-lg flex flex-col gap-space-md" id="chill-selector">
+<div class="flex flex-col text-center items-center">
+<span class="font-label-sm text-label-sm uppercase tracking-widest text-primary-container">Chilled Express Delivery</span>
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface uppercase tracking-tight">Concierge Cold Reserve</h2>
+<p class="font-body-sm text-body-sm text-secondary mt-1 max-w-xs">Packaged in insulated silver cases, delivered at sub-zero drinking temperature.</p>
+</div>
+<!-- Packs Stack -->
+<div class="flex flex-col gap-space-sm" id="pack-container">
+<!-- Pack 1: Selected by default -->
+<div class="pack-card cursor-pointer p-space-md rounded-2xl bg-surface-container-high ring-2 ring-primary-container flex flex-col gap-space-xs transition-all shadow-lg relative" onclick="selectPack(this)">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[22px]">view_in_ar</span>
+<h4 class="font-headline-sm text-headline-sm text-on-surface">The Chic Sleek 6-Pack</h4>
+</div>
+<span class="font-headline-sm text-headline-sm text-on-surface font-semibold">$14.00</span>
+</div>
+<p class="font-body-sm text-body-sm text-secondary">355ml Slim Can Editions • Pre-frosted inside silver thermal sleeve.</p>
+<div class="flex items-center justify-between pt-2">
+<span class="font-label-sm text-[11px] text-primary uppercase tracking-wider">Fast chilled drop in 45 mins</span>
+<span class="pack-check w-5 h-5 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center">
+<span class="material-symbols-outlined text-[14px]">check</span>
+</span>
+</div>
+</div>
+<!-- Pack 2 -->
+<div class="pack-card cursor-pointer p-space-md rounded-2xl bg-surface-container-low flex flex-col gap-space-xs transition-all shadow-sm relative" onclick="selectPack(this)">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary text-[22px]">inventory_2</span>
+<h4 class="font-headline-sm text-headline-sm text-on-surface">Classic 12-Pack Chiller</h4>
+</div>
+<span class="font-headline-sm text-headline-sm text-on-surface font-semibold">$24.00</span>
+</div>
+<p class="font-body-sm text-body-sm text-secondary">Original heritage dimensions • Packed with dry-ice crystals.</p>
+<div class="flex items-center justify-between pt-2">
+<span class="font-label-sm text-[11px] text-secondary uppercase tracking-wider">Standard cold drop</span>
+<span class="pack-check w-5 h-5 rounded-full bg-surface-container-highest text-secondary flex items-center justify-center">
+<span class="material-symbols-outlined text-[14px] hidden">check</span>
+</span>
+</div>
+</div>
+<!-- Pack 3: Subscription Case -->
+<div class="pack-card cursor-pointer p-space-md rounded-2xl bg-surface-container-low flex flex-col gap-space-xs transition-all shadow-sm relative" onclick="selectPack(this)">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary text-[22px]">all_inclusive</span>
+<h4 class="font-headline-sm text-headline-sm text-on-surface">The Silver Subscription</h4>
+</div>
+<span class="font-headline-sm text-headline-sm text-on-surface font-semibold">$38.00<span class="text-body-sm font-normal text-secondary">/mo</span></span>
+</div>
+<p class="font-body-sm text-body-sm text-secondary">24 Cans bi-weekly + exclusive runway limited can collabs.</p>
+<div class="flex items-center justify-between pt-2">
+<span class="font-label-sm text-[11px] text-primary uppercase tracking-wider">Includes VIP Silver Access</span>
+<span class="pack-check w-5 h-5 rounded-full bg-surface-container-highest text-secondary flex items-center justify-center">
+<span class="material-symbols-outlined text-[14px] hidden">check</span>
+</span>
+</div>
+</div>
+</div>
+<!-- Add to Bucket Button with Counter Feedback -->
+<button class="w-full py-4 rounded-full bg-primary-container text-on-primary-container font-label-lg text-label-lg uppercase tracking-widest shadow-xl flex items-center justify-center gap-2 active:scale-[0.98] transition-transform mt-2" onclick="addToBucket(this)">
+<span class="material-symbols-outlined text-[20px]">ice_skating</span>
+<span id="bucket-text">Add to Ice Bucket • $14.00</span>
+</button>
+<div class="flex items-center justify-center gap-2 text-secondary font-label-sm text-label-sm uppercase tracking-wider">
+<span class="material-symbols-outlined text-[16px] text-primary">local_shipping</span>
+        Zero Temperature Loss Guarantee
+      </div>
+</section>
+<!-- 7. BRAND MANIFESTO & SILVER CIRCLE SIGNUP -->
+<footer class="px-margin-mobile pt-space-lg pb-space-xl bg-surface-container-lowest flex flex-col items-center text-center gap-space-lg">
+<!-- Editorial Quote Manifesto -->
+<div class="max-w-xs flex flex-col gap-space-xs">
+<span class="font-display-lg-mobile text-[32px] text-primary leading-none">“</span>
+<p class="font-display-lg-mobile text-headline-sm uppercase text-on-surface tracking-tight -mt-4">
+          Diet Coke is not just a drink.<br/>
+<span class="italic text-primary">It’s an attitude.</span>
+</p>
+<span class="font-label-sm text-label-sm uppercase tracking-widest text-secondary mt-1">Established 1982 • Forever Unfiltered</span>
+</div>
+<!-- Join The Silver Circle Newsletter -->
+<div class="w-full bg-surface-container rounded-2xl p-space-md flex flex-col gap-space-sm text-left">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[20px]">mark_email_read</span>
+<span class="font-label-sm text-label-sm uppercase tracking-widest text-on-surface">The Silver Circle</span>
+</div>
+<h4 class="font-headline-sm text-headline-sm text-on-surface">Be the first to access drops &amp; fashion collabs.</h4>
+<div class="flex flex-col gap-2 mt-1">
+<div class="relative w-full">
+<input class="w-full px-4 py-3 rounded-xl bg-surface-container-lowest text-on-surface placeholder:text-secondary font-body-sm text-body-sm outline-none focus:ring-1 focus:ring-primary-container transition-all" placeholder="enter your email address..." type="email"/>
+</div>
+<button class="w-full py-3 rounded-xl bg-surface-container-highest text-on-surface font-label-lg text-label-lg uppercase tracking-wider hover:bg-primary-container hover:text-on-primary-container transition-all" onclick="handleSubscribe(this)">
+            Join The Circle
+          </button>
+</div>
+<span class="font-label-sm text-[11px] text-secondary">Zero spam. Pure crisp updates. Unsubscribe anytime.</span>
+</div>
+<!-- Social Editorial Grid Links -->
+<div class="flex items-center justify-center gap-space-md">
+<a aria-label="Pinterest" class="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center text-secondary hover:text-on-surface transition-colors" href="#">
+<span class="material-symbols-outlined text-[20px]">push_pin</span>
+</a>
+<a aria-label="Instagram" class="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center text-secondary hover:text-on-surface transition-colors" href="#">
+<span class="material-symbols-outlined text-[20px]">photo_camera</span>
+</a>
+<a aria-label="TikTok" class="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center text-secondary hover:text-on-surface transition-colors" href="#">
+<span class="material-symbols-outlined text-[20px]">music_note</span>
+</a>
+<a aria-label="Share" class="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center text-secondary hover:text-on-surface transition-colors" href="#">
+<span class="material-symbols-outlined text-[20px]">share</span>
+</a>
+</div>
+<!-- Legal Disclaimers -->
+<div class="flex flex-col gap-1 text-[11px] text-secondary/60 font-body-sm max-w-xs">
+<p>© 2025 The Coca-Cola Company. All Rights Reserved.</p>
+<p>Diet Coke is a registered trademark of The Coca-Cola Company. Zero sugars, zero calories per serving.</p>
+</div>
+</footer>
+</div>
+</div>
+<!-- CLIENT-SIDE MICRO-INTERACTIONS SCRIPT -->
+<script>
+  function playTrigger(index, btn) {
+    const captions = [
+      "Playing: Tab Crack (Snap)",
+      "Playing: Micro-Fizz (Effervescence)",
+      "Playing: Clinking Ice Cubes (Tumble)"
+    ];
+    document.getElementById('asmr-caption').innerText = captions[index];
+
+    // Reset button styles
+    const buttons = document.querySelectorAll('.asmr-btn');
+    buttons.forEach((b, i) => {
+      if (i === index) {
+        b.classList.remove('bg-surface-container');
+        b.classList.add('bg-surface-container-highest', 'scale-[1.02]');
+        b.querySelector('.material-symbols-outlined').classList.add('text-primary');
+        b.querySelector('.material-symbols-outlined').classList.remove('text-secondary');
+      } else {
+        b.classList.add('bg-surface-container');
+        b.classList.remove('bg-surface-container-highest', 'scale-[1.02]');
+        b.querySelector('.material-symbols-outlined').classList.remove('text-primary');
+        b.querySelector('.material-symbols-outlined').classList.add('text-secondary');
+      }
+    });
+  }
+
+  function togglePin(btn) {
+    const icon = btn.querySelector('.material-symbols-outlined');
+    if (icon.textContent === 'bookmark') {
+      icon.textContent = 'bookmark_added';
+      icon.style.fontVariationSettings = "'FILL' 1";
+      btn.classList.add('text-primary');
+    } else {
+      icon.textContent = 'bookmark';
+      icon.style.fontVariationSettings = "'FILL' 0";
+      btn.classList.remove('text-primary');
+    }
+  }
+
+  function selectPack(card) {
+    const allCards = document.querySelectorAll('.pack-card');
+    allCards.forEach(c => {
+      c.classList.remove('ring-2', 'ring-primary-container', 'bg-surface-container-high');
+      c.classList.add('bg-surface-container-low');
+      const check = c.querySelector('.pack-check');
+      check.classList.remove('bg-primary-container', 'text-on-primary-container');
+      check.classList.add('bg-surface-container-highest', 'text-secondary');
+      check.querySelector('.material-symbols-outlined').classList.add('hidden');
+    });
+
+    card.classList.remove('bg-surface-container-low');
+    card.classList.add('ring-2', 'ring-primary-container', 'bg-surface-container-high');
+    const activeCheck = card.querySelector('.pack-check');
+    activeCheck.classList.add('bg-primary-container', 'text-on-primary-container');
+    activeCheck.classList.remove('bg-surface-container-highest', 'text-secondary');
+    activeCheck.querySelector('.material-symbols-outlined').classList.remove('hidden');
+
+    // Update button price
+    const priceText = card.querySelector('span.font-semibold').innerText.split('/')[0];
+    document.getElementById('bucket-text').innerText = `Add to Ice Bucket • ${priceText}`;
+  }
+
+  function addToBucket(btn) {
+    const original = btn.innerHTML;
+    btn.innerHTML = `<span class="material-symbols-outlined text-[20px] animate-spin">autorenew</span> Added to Chiller!`;
+    btn.classList.add('bg-on-surface', 'text-surface');
+    setTimeout(() => {
+      btn.innerHTML = original;
+      btn.classList.remove('bg-on-surface', 'text-surface');
+    }, 1800);
+  }
+
+  function handleSubscribe(btn) {
+    const input = btn.previousElementSibling.querySelector('input');
+    if (input.value.includes('@')) {
+      btn.innerText = "Welcome to the Silver Circle";
+      btn.classList.add('bg-primary-container', 'text-on-primary-container');
+      input.value = "";
+    } else {
+      input.focus();
+    }
+  }
+</script></main><nav class="fixed bottom-0 w-full z-50 pb-safe pointer-events-none" data-active-classes="text-on-primary-container bg-primary-container shadow-[0_2px_12px_rgba(227,24,55,0.4)]"><div class="px-margin-mobile pb-space-sm pt-space-xs flex justify-center"><div class="pointer-events-auto h-16 w-full max-w-md px-space-xs bg-surface-container-high/80 backdrop-blur-2xl rounded-full shadow-[0_12px_32px_rgba(0,0,0,0.65)] flex items-center justify-between gap-space-xs"><a aria-current="page" class="flex-1 h-12 flex flex-col items-center justify-center rounded-full transition-all duration-300 text-on-primary-container bg-primary-container shadow-[0_2px_12px_rgba(227,24,55,0.4)]" data-path="taste" href="#"><span class="material-symbols-outlined text-[20px]">local_bar</span><span class="font-label-sm text-label-sm uppercase tracking-widest mt-0.5">Taste</span></a><a class="flex-1 h-12 flex flex-col items-center justify-center rounded-full text-secondary hover:text-on-surface transition-all duration-300" data-path="story" href="#"><span class="material-symbols-outlined text-[20px]">auto_stories</span><span class="font-label-sm text-label-sm uppercase tracking-widest mt-0.5">Story</span></a><a class="flex-1 h-12 flex flex-col items-center justify-center rounded-full text-secondary hover:text-on-surface transition-all duration-300" data-path="pairings" href="#"><span class="material-symbols-outlined text-[20px]">restaurant</span><span class="font-label-sm text-label-sm uppercase tracking-widest mt-0.5">Pairings</span></a><a class="flex-1 h-12 flex flex-col items-center justify-center rounded-full text-secondary hover:text-on-surface transition-all duration-300" data-path="order-chill" href="#"><span class="material-symbols-outlined text-[20px]">ac_unit</span><span class="font-label-sm text-label-sm uppercase tracking-widest mt-0.5">Order Chill</span></a></div></div></nav></body></html>

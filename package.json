@@ -1,0 +1,20 @@
+{
+  "name": "diet-coke-scroll-experience",
+  "version": "1.0.0",
+  "description": "Diet Coke interactive kinetic scroll animation & aesthetic showcase",
+  "main": "index.html",
+  "scripts": {
+    "start": "python3 -m http.server 3000",
+    "dev": "python3 -m http.server 3000",
+    "serve": "npx serve ."
+  },
+  "keywords": [
+    "diet-coke",
+    "scroll-animation",
+    "canvas",
+    "apple-style",
+    "web-audio"
+  ],
+  "author": "Ahsan Ali Aziz",
+  "license": "MIT"
+}
