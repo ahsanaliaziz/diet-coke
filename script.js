@@ -234,11 +234,6 @@
       activeFrameIndex = frameIdx;
       renderFrame(activeFrameIndex);
 
-      if (soundEnabled && Math.abs(activeFrameIndex - lastSoundFrame) > 3) {
-        playCrispFizzSound(activeFrameIndex);
-        lastSoundFrame = activeFrameIndex;
-      }
-
       if (navFrameNum) {
         navFrameNum.textContent = padNumber(activeFrameIndex + 1);
       }
@@ -362,10 +357,10 @@
   function stopAutoplay() {
     isAutoplaying = false;
     if (autoplayTimer) cancelAnimationFrame(autoplayTimer);
-    autoplayBtn.classList.remove('active-state');
-    playIcon.classList.remove('hidden');
-    pauseIcon.classList.add('hidden');
-    playLabel.textContent = 'Auto-Play';
+    if (autoplayBtn) autoplayBtn.classList.remove('active-state');
+    if (playIcon) playIcon.classList.remove('hidden');
+    if (pauseIcon) pauseIcon.classList.add('hidden');
+    if (playLabel) playLabel.textContent = 'Auto-Play';
   }
 
   if (autoplayBtn) {
@@ -393,112 +388,43 @@
     });
   }
 
-  // --- 11. Web Audio API Sensory Sound Design ---
-  function initAudio() {
-    if (!audioCtx) {
-      const AudioContext = window.AudioContext || window.webkitAudioContext;
-      audioCtx = new AudioContext();
+  window.scrollToShowcase = function () {
+    if (showcaseStart) {
+      showcaseStart.scrollIntoView({ behavior: 'smooth' });
     }
-    if (audioCtx.state === 'suspended') {
-      audioCtx.resume();
+  };
+
+  // --- 11. Persistent Background Audio Engine (User Provided bgm.mp3) ---
+  const bgmAudio = document.getElementById('bgm-audio');
+  if (bgmAudio) {
+    bgmAudio.loop = true;
+    bgmAudio.volume = 0.8;
+  }
+
+  function playBgm() {
+    if (bgmAudio && bgmAudio.paused) {
+      bgmAudio.play().catch(() => {
+        // Will start playback on user gesture/interaction
+      });
     }
   }
 
-  function playCrispFizzSound(frameIdx) {
-    if (!audioCtx) return;
-    try {
-      const osc = audioCtx.createOscillator();
-      const gain = audioCtx.createGain();
+  // Continuous music in background on scroll and interactions - No switch-off toggle
+  window.addEventListener('scroll', playBgm, { passive: true });
+  window.addEventListener('wheel', playBgm, { passive: true });
+  window.addEventListener('touchstart', playBgm, { passive: true });
+  window.addEventListener('touchmove', playBgm, { passive: true });
+  window.addEventListener('click', playBgm, { passive: true });
+  window.addEventListener('keydown', playBgm, { passive: true });
 
-      const baseFreq = frameIdx > 40 && frameIdx < 160 ? 1200 : 800;
-      osc.frequency.setValueAtTime(baseFreq + Math.random() * 600, audioCtx.currentTime);
-      osc.frequency.exponentialRampToValueAtTime(200, audioCtx.currentTime + 0.05);
-
-      gain.gain.setValueAtTime(0.04, audioCtx.currentTime);
-      gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 0.05);
-
-      osc.connect(gain);
-      gain.connect(audioCtx.destination);
-
-      osc.start();
-      osc.stop(audioCtx.currentTime + 0.05);
-    } catch (e) {}
-  }
-
-  function playASMRSound(stage) {
-    initAudio();
-    if (!audioCtx) return;
-    try {
-      const osc = audioCtx.createOscillator();
-      const gain = audioCtx.createGain();
-
-      if (stage === 0) {
-        osc.type = 'triangle';
-        osc.frequency.setValueAtTime(1400, audioCtx.currentTime);
-        osc.frequency.exponentialRampToValueAtTime(220, audioCtx.currentTime + 0.08);
-        gain.gain.setValueAtTime(0.2, audioCtx.currentTime);
-        gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.08);
-        osc.connect(gain);
-        gain.connect(audioCtx.destination);
-        osc.start();
-        osc.stop(audioCtx.currentTime + 0.08);
-      } else if (stage === 1) {
-        const bufferSize = audioCtx.sampleRate * 0.25;
-        const buffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
-        const data = buffer.getChannelData(0);
-        for (let i = 0; i < bufferSize; i++) {
-          data[i] = Math.random() * 2 - 1;
-        }
-        const noise = audioCtx.createBufferSource();
-        noise.buffer = buffer;
-        const filter = audioCtx.createBiquadFilter();
-        filter.type = 'bandpass';
-        filter.frequency.value = 5000;
-        gain.gain.setValueAtTime(0.08, audioCtx.currentTime);
-        gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.25);
-        noise.connect(filter);
-        filter.connect(gain);
-        gain.connect(audioCtx.destination);
-        noise.start();
-      } else {
-        osc.type = 'sine';
-        osc.frequency.setValueAtTime(2400, audioCtx.currentTime);
-        osc.frequency.exponentialRampToValueAtTime(1800, audioCtx.currentTime + 0.12);
-        gain.gain.setValueAtTime(0.15, audioCtx.currentTime);
-        gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.12);
-        osc.connect(gain);
-        gain.connect(audioCtx.destination);
-        osc.start();
-        osc.stop(audioCtx.currentTime + 0.12);
-      }
-    } catch (e) {}
-  }
-
-  if (soundBtn) {
-    soundBtn.addEventListener('click', () => {
-      initAudio();
-      soundEnabled = !soundEnabled;
-
-      if (soundEnabled) {
-        soundIconOff.classList.add('hidden');
-        soundIconOn.classList.remove('hidden');
-        soundBtn.classList.add('active-state');
-      } else {
-        soundIconOff.classList.remove('hidden');
-        soundIconOn.classList.add('hidden');
-        soundBtn.classList.remove('active-state');
-      }
-    });
-  }
-
-  // --- 12. Aesthetic Showcase Micro-Interactions ---
+  // --- 12. Aesthetic Showcase Micro-Interactions & Audio FX ---
   window.playTrigger = function (index, btn) {
-    playASMRSound(index);
+    playBgm();
 
     const captions = [
-      "Playing: Tab Crack (Snap)",
-      "Playing: Micro-Fizz (Effervescence)",
-      "Playing: Clinking Ice Cubes (Tumble)"
+      "Playing: The Tab Crack • Signature Snap",
+      "Playing: Micro-Fizz • Pure Effervescence",
+      "Playing: Sub-Zero Frost • Tumbling Chill"
     ];
     const captionEl = document.getElementById('asmr-caption');
     if (captionEl) captionEl.innerText = captions[index];
@@ -536,6 +462,14 @@
     }
   };
 
+  // --- 13. PhonePe UPI Payment Gateway & Concierge Cart Engine ---
+  let selectedPackInfo = {
+    name: "The Chic Sleek 6-Pack",
+    cans: 6,
+    pricePerCan: 40,
+    total: 240
+  };
+
   window.selectPack = function (card) {
     const allCards = document.querySelectorAll('.pack-card');
     allCards.forEach(c => {
@@ -560,50 +494,136 @@
       if (icon) icon.classList.remove('hidden');
     }
 
-    const priceText = card.querySelector('span.font-semibold').innerText.split('/')[0].trim();
-    const bucketText = document.getElementById('bucket-text');
-    if (bucketText) bucketText.innerText = `Add to Ice Bucket • ${priceText}`;
-  };
-
-  window.addToBucket = function (btn) {
-    // Determine active selected pack
-    const activeCard = document.querySelector('.pack-card.ring-primary-container') || document.querySelector('.pack-card');
-    let packName = "The Chic Sleek 6-Pack";
+    const titleEl = card.querySelector('h4');
+    let title = titleEl ? titleEl.innerText.trim() : "The Chic Sleek 6-Pack";
     let cans = 6;
     let total = 240;
 
-    if (activeCard) {
-      const titleEl = activeCard.querySelector('h4');
-      if (titleEl) packName = titleEl.innerText.trim();
-      if (packName.includes("12-Pack")) {
-        cans = 12;
-        total = 480;
-      } else if (packName.includes("Subscription")) {
-        cans = 24;
-        total = 960;
-      }
+    if (title.includes("12-Pack")) {
+      cans = 12;
+      total = 480;
+    } else if (title.includes("Subscription") || title.includes("24")) {
+      cans = 24;
+      total = 960;
     }
 
-    const newOrder = {
-      id: `DC-${Math.floor(1000 + Math.random() * 9000)}`,
-      customer: "Metropolitan Customer",
-      pack: packName,
+    selectedPackInfo = {
+      name: title,
       cans: cans,
       pricePerCan: 40,
-      total: total,
+      total: total
+    };
+
+    const bucketText = document.getElementById('bucket-text');
+    if (bucketText) {
+      bucketText.innerText = `Proceed to Checkout • ₹${total} (PhonePe UPI)`;
+    }
+  };
+
+  window.openCheckoutModal = function (customPack) {
+    playBgm();
+
+    if (customPack === 'chilled-can') {
+      selectedPackInfo = {
+        name: "Single Sub-Zero Chilled Can",
+        cans: 1,
+        pricePerCan: 40,
+        total: 40
+      };
+    }
+
+    const packNameEl = document.getElementById('checkout-pack-name');
+    const packBreakdownEl = document.getElementById('checkout-pack-breakdown');
+    const totalPriceEl = document.getElementById('checkout-total-price');
+    const upiAppLinkEl = document.getElementById('upi-app-link');
+
+    if (packNameEl) packNameEl.innerText = selectedPackInfo.name;
+    if (packBreakdownEl) {
+      packBreakdownEl.innerText = `${selectedPackInfo.cans} Can${selectedPackInfo.cans > 1 ? 's' : ''} × ₹40 per can • Instant Cold Drop`;
+    }
+    if (totalPriceEl) totalPriceEl.innerText = `₹${selectedPackInfo.total}`;
+
+    if (upiAppLinkEl) {
+      const upiUrl = `upi://pay?pa=8102899986@ybl&pn=Ahsan%20Aziz&am=${selectedPackInfo.total}&cu=INR&tn=Diet%20Coke%20${encodeURIComponent(selectedPackInfo.name)}`;
+      upiAppLinkEl.href = upiUrl;
+    }
+
+    const modal = document.getElementById('checkout-modal');
+    const viewForm = document.getElementById('checkout-view-form');
+    const viewSuccess = document.getElementById('checkout-view-success');
+
+    if (viewForm) viewForm.classList.remove('hidden');
+    if (viewSuccess) viewSuccess.classList.add('hidden');
+    if (modal) modal.classList.remove('hidden');
+  };
+
+  window.closeCheckoutModal = function () {
+    const modal = document.getElementById('checkout-modal');
+    if (modal) modal.classList.add('hidden');
+  };
+
+  window.copyUpiId = function () {
+    const upiId = "8102899986@ybl";
+    const btn = document.getElementById('copy-upi-btn');
+
+    const finish = () => {
+      if (btn) {
+        const orig = btn.innerText;
+        btn.innerText = "COPIED ✓";
+        btn.classList.add('bg-emerald-500/30', 'text-emerald-300');
+        setTimeout(() => {
+          btn.innerText = orig;
+          btn.classList.remove('bg-emerald-500/30', 'text-emerald-300');
+        }, 2200);
+      }
+    };
+
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(upiId).then(finish).catch(finish);
+    } else {
+      finish();
+    }
+  };
+
+  window.handleUpiPaymentSubmit = function (event) {
+    if (event) event.preventDefault();
+
+    const nameInput = document.getElementById('pay-name');
+    const phoneInput = document.getElementById('pay-phone');
+    const addressInput = document.getElementById('pay-address');
+    const utrInput = document.getElementById('pay-utr');
+
+    const name = nameInput && nameInput.value.trim() ? nameInput.value.trim() : "Metropolitan Customer";
+    const phone = phoneInput && phoneInput.value.trim() ? phoneInput.value.trim() : "8102899986";
+    const address = addressInput && addressInput.value.trim() ? addressInput.value.trim() : "Sub-Zero Express Drop";
+    const utr = utrInput && utrInput.value.trim() ? utrInput.value.trim() : `UPI-${Math.floor(100000000000 + Math.random() * 900000000000)}`;
+
+    const orderId = `DC-${Math.floor(1000 + Math.random() * 9000)}`;
+
+    const newOrder = {
+      id: orderId,
+      customer: name,
+      phone: phone,
+      pack: selectedPackInfo.name,
+      cans: selectedPackInfo.cans,
+      pricePerCan: 40,
+      total: selectedPackInfo.total,
       status: "Sub-Zero Chilled",
-      address: "Express Cold Drop",
+      address: address,
+      utr: utr,
+      gateway: "PhonePe UPI (8102899986@ybl)",
+      payee: "Ahsan Aziz",
       timestamp: new Date().toISOString()
     };
 
-    // Save to local storage for immediate Admin Dashboard visibility
+    // Save to local storage for instant dashboard reflection
     try {
       const existing = JSON.parse(localStorage.getItem("diet_coke_orders_v1") || "[]");
       existing.unshift(newOrder);
       localStorage.setItem("diet_coke_orders_v1", JSON.stringify(existing));
     } catch (e) {}
 
-    // Send to backend API
+    // POST to backend API
     try {
       fetch("/api/orders", {
         method: "POST",
@@ -612,15 +632,20 @@
       });
     } catch (e) {}
 
-    // Button feedback
-    const original = btn.innerHTML;
-    btn.innerHTML = `<span class="material-symbols-outlined text-[20px] text-emerald-300">verified</span> Added to Chiller • ₹${total} (View in Dashboard ⚡)`;
-    btn.classList.add('bg-white', 'text-black');
+    // Update Success Screen
+    const successOrderIdEl = document.getElementById('success-order-id');
+    const successOrderTotalEl = document.getElementById('success-order-total');
+    if (successOrderIdEl) successOrderIdEl.innerText = orderId;
+    if (successOrderTotalEl) successOrderTotalEl.innerText = `₹${selectedPackInfo.total}`;
 
-    setTimeout(() => {
-      btn.innerHTML = original;
-      btn.classList.remove('bg-white', 'text-black');
-    }, 2800);
+    const viewForm = document.getElementById('checkout-view-form');
+    const viewSuccess = document.getElementById('checkout-view-success');
+    if (viewForm) viewForm.classList.add('hidden');
+    if (viewSuccess) viewSuccess.classList.remove('hidden');
+  };
+
+  window.addToBucket = function (btn) {
+    window.openCheckoutModal();
   };
 
   window.handleSubscribe = function (btn) {

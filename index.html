@@ -146,34 +146,6 @@
         <span class="material-symbols-outlined text-[15px]">dashboard</span>
         <span>Dashboard ⚡</span>
       </a>
-
-      <button class="nav-btn" onclick="scrollToShowcase()">
-        <span>Showcase ↓</span>
-      </button>
-
-      <button id="sound-btn" class="nav-btn" title="Toggle Sound FX">
-        <svg id="sound-icon-off" class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
-          <line x1="23" y1="9" x2="17" y2="15"></line>
-          <line x1="17" y1="9" x2="23" y2="15"></line>
-        </svg>
-        <svg id="sound-icon-on" class="icon hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
-          <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>
-        </svg>
-        <span id="sound-label">Audio FX</span>
-      </button>
-
-      <button id="autoplay-btn" class="nav-btn">
-        <svg id="play-icon" class="icon" viewBox="0 0 24 24" fill="currentColor">
-          <polygon points="5 3 19 12 5 21 5 3"></polygon>
-        </svg>
-        <svg id="pause-icon" class="icon hidden" viewBox="0 0 24 24" fill="currentColor">
-          <rect x="6" y="4" width="4" height="16"></rect>
-          <rect x="14" y="4" width="4" height="16"></rect>
-        </svg>
-        <span id="play-label">Auto-Play</span>
-      </button>
     </div>
   </header>
 
@@ -304,11 +276,11 @@
         </p>
 
         <div class="cta-actions">
-          <button class="cta-btn primary-glow" onclick="scrollToShowcase()">
-            <span>EXPLORE SHOWCASE</span>
+          <button class="cta-btn primary-glow" onclick="openCheckoutModal('chilled-can')">
+            <span>ORDER CHILLED CAN • ₹40</span>
             <svg class="icon arrow-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <line x1="12" y1="5" x2="12" y2="19"></line>
-              <polyline points="19 12 12 19 5 12"></polyline>
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+              <polyline points="12 5 19 12 12 19"></polyline>
             </svg>
           </button>
           <button class="cta-btn secondary-btn" id="replay-btn">
@@ -731,9 +703,9 @@
         </div>
 
         <!-- Add to Bucket Button with Feedback -->
-        <button class="w-full py-4 rounded-full bg-primary-container text-on-primary-container font-label-lg text-label-lg uppercase tracking-widest shadow-xl flex items-center justify-center gap-2 active:scale-[0.98] transition-transform mt-2 hover:opacity-95" onclick="addToBucket(this)">
-          <span class="material-symbols-outlined text-[20px]">ice_skating</span>
-          <span id="bucket-text">Add to Ice Bucket • ₹240</span>
+        <button class="w-full py-4 rounded-full bg-primary-container text-on-primary-container font-label-lg text-label-lg uppercase tracking-widest shadow-xl flex items-center justify-center gap-2 active:scale-[0.98] transition-transform mt-2 hover:opacity-95" onclick="openCheckoutModal()">
+          <span class="material-symbols-outlined text-[20px]">account_balance_wallet</span>
+          <span id="bucket-text">Proceed to Checkout • ₹240 (PhonePe UPI)</span>
         </button>
 
         <div class="flex items-center justify-center gap-2 text-secondary font-label-sm text-label-sm uppercase tracking-wider">
@@ -794,6 +766,155 @@
           <p>Diet Coke is a registered trademark of The Coca-Cola Company. Zero sugars, zero calories per serving.</p>
         </div>
       </footer>
+    </div>
+  </div>
+
+  <!-- Persistent Background Audio (Continuous on user scroll/interaction) -->
+  <audio id="bgm-audio" src="bgm.mp3" loop preload="auto"></audio>
+
+  <!-- =====================================================================
+       PHONEPE UPI CHECKOUT & PAYMENT GATEWAY MODAL (8102899986@ybl)
+       ===================================================================== -->
+  <div id="checkout-modal" class="fixed inset-0 z-[999] bg-black/85 backdrop-blur-md flex items-center justify-center p-4 hidden overflow-y-auto">
+    <div class="bg-[#121620] border border-white/10 rounded-3xl max-w-lg w-full p-6 shadow-2xl space-y-5 my-8 relative">
+      
+      <!-- Close button -->
+      <button onclick="closeCheckoutModal()" class="absolute top-5 right-5 w-8 h-8 rounded-full bg-white/5 hover:bg-white/15 flex items-center justify-center text-white/60 hover:text-white transition-colors">
+        <span class="material-symbols-outlined text-[20px]">close</span>
+      </button>
+
+      <!-- Modal Header -->
+      <div class="flex items-center gap-3 border-b border-white/10 pb-4">
+        <div class="w-10 h-10 rounded-2xl bg-[#5f259f] flex items-center justify-center text-white font-black text-xl shadow-[0_0_15px_rgba(95,37,159,0.5)]">
+          पे
+        </div>
+        <div>
+          <div class="flex items-center gap-2">
+            <h3 class="font-bold text-white text-base tracking-tight font-['Space_Grotesk']">PhonePe UPI Gateway</h3>
+            <span class="text-[10px] font-mono px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">VERIFIED MERCHANT</span>
+          </div>
+          <p class="text-[11px] text-white/50">Accepted across PhonePe, Google Pay, Paytm &amp; all UPI apps</p>
+        </div>
+      </div>
+
+      <!-- State 1: Active Payment View -->
+      <div id="checkout-view-form" class="space-y-4">
+        
+        <!-- Order Bill Summary Ribbon -->
+        <div class="bg-[#0b0e14] border border-white/5 rounded-2xl p-4 flex items-center justify-between">
+          <div>
+            <div class="font-bold text-white text-sm" id="checkout-pack-name">The Chic Sleek 6-Pack</div>
+            <div class="text-[11px] text-white/50" id="checkout-pack-breakdown">6 Cans × ₹40 per can • Cold Delivery</div>
+          </div>
+          <div class="text-right">
+            <span class="text-xs text-white/40 block">Bill Amount</span>
+            <span class="font-mono text-2xl font-black text-emerald-400" id="checkout-total-price">₹240</span>
+          </div>
+        </div>
+
+        <!-- PhonePe QR Code & UPI ID Box -->
+        <div class="bg-[#0b0e14] border border-[#5f259f]/30 rounded-2xl p-4 flex flex-col items-center text-center space-y-3">
+          <div class="text-[11px] text-[#b388ff] font-bold uppercase tracking-widest flex items-center gap-1.5">
+            <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+            <span>Scan QR Code to Pay Instantly</span>
+          </div>
+
+          <!-- The PhonePe QR Image -->
+          <div class="relative p-2.5 rounded-2xl bg-white shadow-2xl max-w-[200px]">
+            <img src="phonepe-qr.png" alt="PhonePe UPI QR Code" class="w-full h-auto rounded-lg">
+          </div>
+
+          <!-- Merchant & UPI ID Details -->
+          <div class="w-full space-y-1.5 pt-1">
+            <div class="text-xs text-white/60 font-medium">Merchant: <strong class="text-white">Ahsan Aziz</strong></div>
+            
+            <div class="flex items-center justify-between bg-black/50 border border-white/10 px-3 py-2 rounded-xl text-xs font-mono">
+              <span class="text-white/50">UPI ID:</span>
+              <span class="text-emerald-300 font-bold select-all tracking-wider" id="upi-id-val">8102899986@ybl</span>
+              <button onclick="copyUpiId()" class="px-2 py-0.5 rounded bg-white/10 hover:bg-white/20 text-white text-[10px] font-sans font-semibold transition-colors" id="copy-upi-btn">
+                COPY
+              </button>
+            </div>
+
+            <!-- Mobile Direct Pay Link -->
+            <a id="upi-app-link" href="upi://pay?pa=8102899986@ybl&pn=Ahsan%20Aziz&am=240&cu=INR&tn=Diet%20Coke%20Cold%20Drop" class="block w-full py-2.5 rounded-xl bg-[#5f259f] hover:bg-[#722ebd] text-white text-xs font-bold uppercase tracking-wider transition-all shadow-[0_0_15px_rgba(95,37,159,0.4)] text-center mt-2">
+              Pay Directly via UPI App
+            </a>
+          </div>
+        </div>
+
+        <!-- Customer Delivery Details Form -->
+        <form onsubmit="handleUpiPaymentSubmit(event)" class="space-y-3 text-xs">
+          <div class="grid grid-cols-2 gap-2.5">
+            <div>
+              <label class="block text-white/50 text-[10px] font-semibold uppercase mb-1">Your Full Name</label>
+              <input id="pay-name" required placeholder="e.g. Vikram Singhania" class="w-full px-3 py-2 rounded-xl bg-[#0b0e14] border border-white/10 text-white placeholder-white/25 focus:border-[#e31837] outline-none">
+            </div>
+            <div>
+              <label class="block text-white/50 text-[10px] font-semibold uppercase mb-1">Mobile Number</label>
+              <input id="pay-phone" required placeholder="e.g. 98201 44521" class="w-full px-3 py-2 rounded-xl bg-[#0b0e14] border border-white/10 text-white placeholder-white/25 focus:border-[#e31837] outline-none">
+            </div>
+          </div>
+
+          <div>
+            <label class="block text-white/50 text-[10px] font-semibold uppercase mb-1">Delivery Address &amp; City</label>
+            <input id="pay-address" required placeholder="e.g. Flat 402, Sea Green Apt, Bandra West, Mumbai" class="w-full px-3 py-2 rounded-xl bg-[#0b0e14] border border-white/10 text-white placeholder-white/25 focus:border-[#e31837] outline-none">
+          </div>
+
+          <div>
+            <label class="block text-white/50 text-[10px] font-semibold uppercase mb-1">UPI Ref / UTR No. (Optional)</label>
+            <input id="pay-utr" placeholder="12-digit UTR from PhonePe / GPay" class="w-full px-3 py-2 rounded-xl bg-[#0b0e14] border border-white/10 text-white placeholder-white/25 focus:border-[#e31837] outline-none">
+          </div>
+
+          <!-- Submit Order Button -->
+          <button type="submit" id="confirm-payment-btn" class="w-full py-3.5 rounded-2xl bg-[#e31837] hover:bg-[#ff2a3e] text-white font-bold text-xs uppercase tracking-wider transition-all shadow-[0_0_20px_rgba(227,24,55,0.4)] flex items-center justify-center gap-2 mt-2">
+            <span class="material-symbols-outlined text-[18px]">verified</span>
+            <span>I Have Paid • Confirm Order</span>
+          </button>
+        </form>
+
+      </div>
+
+      <!-- State 2: Payment Success Screen -->
+      <div id="checkout-view-success" class="space-y-4 text-center py-6 hidden">
+        <div class="w-16 h-16 rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 flex items-center justify-center mx-auto shadow-[0_0_30px_rgba(52,211,153,0.3)]">
+          <span class="material-symbols-outlined text-[36px]">check_circle</span>
+        </div>
+
+        <div>
+          <h4 class="text-xl font-bold text-white font-['Space_Grotesk']">Payment Received!</h4>
+          <p class="text-xs text-white/60 mt-1">Order confirmed at ₹40/can via PhonePe (8102899986@ybl)</p>
+        </div>
+
+        <div class="bg-[#0b0e14] border border-white/5 rounded-2xl p-4 text-left font-mono text-xs space-y-2">
+          <div class="flex justify-between">
+            <span class="text-white/40">Order ID:</span>
+            <span class="text-white font-bold" id="success-order-id">DC-9043</span>
+          </div>
+          <div class="flex justify-between">
+            <span class="text-white/40">Total Paid:</span>
+            <span class="text-emerald-400 font-bold" id="success-order-total">₹240</span>
+          </div>
+          <div class="flex justify-between">
+            <span class="text-white/40">Estimated Delivery:</span>
+            <span class="text-cyan-400 font-bold">45 Mins • Sub-Zero Frost</span>
+          </div>
+          <div class="flex justify-between">
+            <span class="text-white/40">Payment Gateway:</span>
+            <span class="text-white">PhonePe (Ahsan Aziz)</span>
+          </div>
+        </div>
+
+        <div class="flex gap-2 pt-2">
+          <button onclick="closeCheckoutModal()" class="flex-1 py-3 rounded-xl bg-white/5 hover:bg-white/10 text-white font-semibold text-xs border border-white/10 transition-colors">
+            Close
+          </button>
+          <a href="dashboard.html" class="flex-1 py-3 rounded-xl bg-[#e31837] hover:bg-[#ff2a3e] text-white font-bold text-xs uppercase tracking-wider transition-all flex items-center justify-center gap-1.5 shadow-[0_0_15px_rgba(227,24,55,0.4)]">
+            <span>View in Dashboard ⚡</span>
+          </a>
+        </div>
+      </div>
+
     </div>
   </div>
 

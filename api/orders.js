@@ -91,13 +91,23 @@ module.exports = async (req, res) => {
         body = JSON.parse(body);
       }
 
-      const { customer = "Guest Chiller", pack = "The Chic Sleek 6-Pack", cans = 6, address = "Metropolitan Hub", phone = "+91 99999 00000" } = body || {};
+      const { 
+        id = `DC-${Math.floor(1000 + Math.random() * 9000)}`,
+        customer = "Guest Chiller", 
+        pack = "The Chic Sleek 6-Pack", 
+        cans = 6, 
+        address = "Metropolitan Hub", 
+        phone = "+91 99999 00000",
+        total,
+        utr = "UPI-DIRECT",
+        gateway = "PhonePe UPI (8102899986@ybl)"
+      } = body || {};
 
       const canCount = parseInt(cans, 10) || 6;
-      const totalAmount = canCount * 40; // ₹40 per can
+      const totalAmount = total ? parseInt(total, 10) : canCount * 40; // ₹40 per can
 
       const newOrder = {
-        id: `DC-${Math.floor(1000 + Math.random() * 9000)}`,
+        id,
         customer: customer.trim() || "Guest Customer",
         pack,
         cans: canCount,
@@ -106,6 +116,9 @@ module.exports = async (req, res) => {
         status: "Sub-Zero Chilled",
         address: address.trim(),
         phone: phone.trim(),
+        utr,
+        gateway,
+        payee: "Ahsan Aziz (8102899986@ybl)",
         timestamp: new Date().toISOString()
       };
 
