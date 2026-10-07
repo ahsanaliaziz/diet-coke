@@ -1,6 +1,6 @@
 /**
  * Diet Coke Admin Dashboard Logic
- * Flat Price Standard: ₹40 per can
+ * Flat Price Standard: ₹1 per can
  */
 
 const API_KEY = "DC_PROD_LIVE_KEY_8204";
@@ -12,8 +12,8 @@ let localOrders = [
     customer: "Aarav Sharma",
     pack: "The Chic Sleek 6-Pack",
     cans: 6,
-    pricePerCan: 40,
-    total: 240,
+    pricePerCan: 1,
+    total: 6,
     status: "Out for Delivery",
     address: "Bandra West, Mumbai",
     timestamp: new Date(Date.now() - 15 * 60 * 1000).toISOString()
@@ -23,8 +23,8 @@ let localOrders = [
     customer: "Rohan Mehra",
     pack: "Classic 12-Pack Chiller",
     cans: 12,
-    pricePerCan: 40,
-    total: 480,
+    pricePerCan: 1,
+    total: 12,
     status: "Chilled & Packed",
     address: "Indiranagar, Bangalore",
     timestamp: new Date(Date.now() - 45 * 60 * 1000).toISOString()
@@ -34,8 +34,8 @@ let localOrders = [
     customer: "Priya Verma",
     pack: "The Silver Subscription",
     cans: 24,
-    pricePerCan: 40,
-    total: 960,
+    pricePerCan: 1,
+    total: 24,
     status: "Delivered",
     address: "Defence Colony, New Delhi",
     timestamp: new Date(Date.now() - 120 * 60 * 1000).toISOString()
@@ -45,8 +45,8 @@ let localOrders = [
     customer: "Ananya Patel",
     pack: "The Chic Sleek 6-Pack",
     cans: 6,
-    pricePerCan: 40,
-    total: 240,
+    pricePerCan: 1,
+    total: 6,
     status: "Delivered",
     address: "Koregaon Park, Pune",
     timestamp: new Date(Date.now() - 240 * 60 * 1000).toISOString()
@@ -223,7 +223,7 @@ function closeNewOrderModal() {
 function updateModalPrice() {
   const select = document.getElementById("modal-pack-select");
   const cans = parseInt(select.value, 10);
-  const total = cans * 40; // ₹40 per can
+  const total = cans * 1; // ₹1 per can
   document.getElementById("modal-total-display").textContent = `₹${total}`;
 }
 
@@ -234,14 +234,14 @@ async function handleCreateOrder(e) {
   const cans = parseInt(select.value, 10);
   const packName = select.options[select.selectedIndex].text.split("(")[0].trim();
   const city = document.getElementById("modal-cust-city").value;
-  const total = cans * 40;
+  const total = cans * 1;
 
   const newOrder = {
     id: `DC-${Math.floor(1000 + Math.random() * 9000)}`,
     customer: name,
     pack: packName,
     cans: cans,
-    pricePerCan: 40,
+    pricePerCan: 1,
     total: total,
     status: "Sub-Zero Chilled",
     address: city,

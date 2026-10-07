@@ -465,32 +465,33 @@
     }
   };
 
-  // --- 11. Persistent Background Audio Engine (User Provided bgm.mp3) ---
+  // --- 11. Persistent Background Audio Engine (Starts when User Scrolls) ---
   const bgmAudio = document.getElementById('bgm-audio');
   if (bgmAudio) {
     bgmAudio.loop = true;
     bgmAudio.volume = 0.8;
   }
 
-  function playBgm() {
-    if (bgmAudio && bgmAudio.paused) {
-      bgmAudio.play().catch(() => {
-        // Will start playback on user gesture/interaction
+  let bgmStarted = false;
+  function startBgmOnScroll() {
+    if (!bgmStarted && bgmAudio) {
+      bgmAudio.play().then(() => {
+        bgmStarted = true;
+      }).catch(() => {
+        // Handled: Will retry on user gesture
       });
     }
   }
 
-  // Continuous music in background on scroll and interactions - No switch-off toggle
-  window.addEventListener('scroll', playBgm, { passive: true });
-  window.addEventListener('wheel', playBgm, { passive: true });
-  window.addEventListener('touchstart', playBgm, { passive: true });
-  window.addEventListener('touchmove', playBgm, { passive: true });
-  window.addEventListener('click', playBgm, { passive: true });
-  window.addEventListener('keydown', playBgm, { passive: true });
+  // Audio starts specifically when user starts scrolling!
+  window.addEventListener('scroll', startBgmOnScroll, { passive: true });
+  window.addEventListener('wheel', startBgmOnScroll, { passive: true });
+  window.addEventListener('touchmove', startBgmOnScroll, { passive: true });
+  window.addEventListener('touchstart', startBgmOnScroll, { passive: true });
 
   // --- 12. Aesthetic Showcase Micro-Interactions & Audio FX ---
   window.playTrigger = function (index, btn) {
-    playBgm();
+    startBgmOnScroll();
 
     const captions = [
       "Playing: The Tab Crack • Signature Snap",
@@ -533,12 +534,12 @@
     }
   };
 
-  // --- 13. PhonePe UPI Payment Gateway & Concierge Cart Engine ---
+  // --- 13. PhonePe UPI Payment Gateway & Concierge Cart Engine (₹1 / Can) ---
   let selectedPackInfo = {
     name: "The Chic Sleek 6-Pack",
     cans: 6,
-    pricePerCan: 40,
-    total: 240
+    pricePerCan: 1,
+    total: 6
   };
 
   window.selectPack = function (card) {
@@ -568,20 +569,20 @@
     const titleEl = card.querySelector('h4');
     let title = titleEl ? titleEl.innerText.trim() : "The Chic Sleek 6-Pack";
     let cans = 6;
-    let total = 240;
+    let total = 6;
 
     if (title.includes("12-Pack")) {
       cans = 12;
-      total = 480;
+      total = 12;
     } else if (title.includes("Subscription") || title.includes("24")) {
       cans = 24;
-      total = 960;
+      total = 24;
     }
 
     selectedPackInfo = {
       name: title,
       cans: cans,
-      pricePerCan: 40,
+      pricePerCan: 1,
       total: total
     };
 
@@ -592,45 +593,90 @@
   };
 
   window.openCheckoutModal = function (customPack) {
-    playBgm();
+    startBgmOnScroll();
 
     if (customPack === 'chilled-can') {
       selectedPackInfo = {
         name: "Single Sub-Zero Chilled Can",
         cans: 1,
-        pricePerCan: 40,
-        total: 40
+        pricePerCan: 1,
+        total: 1
       };
     }
 
     const packNameEl = document.getElementById('checkout-pack-name');
     const packBreakdownEl = document.getElementById('checkout-pack-breakdown');
     const totalPriceEl = document.getElementById('checkout-total-price');
-    const upiAppLinkEl = document.getElementById('upi-app-link');
 
     if (packNameEl) packNameEl.innerText = selectedPackInfo.name;
     if (packBreakdownEl) {
-      packBreakdownEl.innerText = `${selectedPackInfo.cans} Can${selectedPackInfo.cans > 1 ? 's' : ''} × ₹40 per can • Instant Cold Drop`;
+      packBreakdownEl.innerText = `${selectedPackInfo.cans} Can${selectedPackInfo.cans > 1 ? 's' : ''} × ₹1 per can • Instant Cold Drop`;
     }
     if (totalPriceEl) totalPriceEl.innerText = `₹${selectedPackInfo.total}`;
 
-    if (upiAppLinkEl) {
-      const upiUrl = `upi://pay?pa=8102899986@ybl&pn=Ahsan%20Aziz&am=${selectedPackInfo.total}&cu=INR&tn=Diet%20Coke%20${encodeURIComponent(selectedPackInfo.name)}`;
-      upiAppLinkEl.href = upiUrl;
-    }
+    // Always start at Step 1: Address First
+    window.goToAddressStep();
 
     const modal = document.getElementById('checkout-modal');
-    const viewForm = document.getElementById('checkout-view-form');
-    const viewSuccess = document.getElementById('checkout-view-success');
-
-    if (viewForm) viewForm.classList.remove('hidden');
-    if (viewSuccess) viewSuccess.classList.add('hidden');
     if (modal) modal.classList.remove('hidden');
   };
 
   window.closeCheckoutModal = function () {
     const modal = document.getElementById('checkout-modal');
     if (modal) modal.classList.add('hidden');
+  };
+
+  window.goToAddressStep = function () {
+    const stepAddress = document.getElementById('checkout-step-address');
+    const stepPayment = document.getElementById('checkout-step-payment');
+    const stepSuccess = document.getElementById('checkout-step-success');
+    const stepCaption = document.getElementById('modal-step-caption');
+
+    if (stepAddress) stepAddress.classList.remove('hidden');
+    if (stepPayment) stepPayment.classList.add('hidden');
+    if (stepSuccess) stepSuccess.classList.add('hidden');
+    if (stepCaption) stepCaption.innerText = "Step 1 of 2 • Delivery Location & Contact Details";
+  };
+
+  window.handleProceedToPayment = function (event) {
+    if (event) event.preventDefault();
+
+    const name = document.getElementById('pay-name')?.value.trim();
+    const phone = document.getElementById('pay-phone')?.value.trim();
+    const address = document.getElementById('pay-address')?.value.trim();
+    const city = document.getElementById('pay-city')?.value.trim();
+    const pincode = document.getElementById('pay-pincode')?.value.trim();
+
+    if (!name || !phone || !address || !city || !pincode) {
+      alert("Please fill in your delivery name, phone, address, city, and pincode.");
+      return;
+    }
+
+    // Populate Step 2 confirmed summary
+    const previewSummary = document.getElementById('preview-delivery-summary');
+    const previewPhone = document.getElementById('preview-delivery-phone');
+    const payAmountBadge = document.getElementById('pay-amount-badge');
+    const upiAppLinkEl = document.getElementById('upi-app-link');
+
+    if (previewSummary) previewSummary.innerText = `${name} • ${address}, ${city} - ${pincode}`;
+    if (previewPhone) previewPhone.innerText = `Ph: ${phone}`;
+    if (payAmountBadge) payAmountBadge.innerText = `₹${selectedPackInfo.total}`;
+
+    if (upiAppLinkEl) {
+      const upiUrl = `upi://pay?pa=8102899986@ybl&pn=Ahsan%20Aziz&am=${selectedPackInfo.total}&cu=INR&tn=Diet%20Coke%20${encodeURIComponent(selectedPackInfo.name)}`;
+      upiAppLinkEl.href = upiUrl;
+    }
+
+    // Transition to Step 2
+    const stepAddress = document.getElementById('checkout-step-address');
+    const stepPayment = document.getElementById('checkout-step-payment');
+    const stepSuccess = document.getElementById('checkout-step-success');
+    const stepCaption = document.getElementById('modal-step-caption');
+
+    if (stepAddress) stepAddress.classList.add('hidden');
+    if (stepPayment) stepPayment.classList.remove('hidden');
+    if (stepSuccess) stepSuccess.classList.add('hidden');
+    if (stepCaption) stepCaption.innerText = `Step 2 of 2 • Pay ₹${selectedPackInfo.total} via PhonePe UPI`;
   };
 
   window.copyUpiId = function () {
@@ -659,16 +705,15 @@
   window.handleUpiPaymentSubmit = function (event) {
     if (event) event.preventDefault();
 
-    const nameInput = document.getElementById('pay-name');
-    const phoneInput = document.getElementById('pay-phone');
-    const addressInput = document.getElementById('pay-address');
-    const utrInput = document.getElementById('pay-utr');
+    const name = document.getElementById('pay-name')?.value.trim() || "Metropolitan Customer";
+    const phone = document.getElementById('pay-phone')?.value.trim() || "8102899986";
+    const address = document.getElementById('pay-address')?.value.trim() || "Sub-Zero Express Drop";
+    const city = document.getElementById('pay-city')?.value.trim() || "Metro";
+    const pincode = document.getElementById('pay-pincode')?.value.trim() || "400001";
+    const landmark = document.getElementById('pay-landmark')?.value.trim();
+    const utr = document.getElementById('pay-utr')?.value.trim() || `UPI-${Math.floor(100000000000 + Math.random() * 900000000000)}`;
 
-    const name = nameInput && nameInput.value.trim() ? nameInput.value.trim() : "Metropolitan Customer";
-    const phone = phoneInput && phoneInput.value.trim() ? phoneInput.value.trim() : "8102899986";
-    const address = addressInput && addressInput.value.trim() ? addressInput.value.trim() : "Sub-Zero Express Drop";
-    const utr = utrInput && utrInput.value.trim() ? utrInput.value.trim() : `UPI-${Math.floor(100000000000 + Math.random() * 900000000000)}`;
-
+    const fullAddress = `${address}, ${city} - ${pincode}${landmark ? ` (${landmark})` : ''}`;
     const orderId = `DC-${Math.floor(1000 + Math.random() * 9000)}`;
 
     const newOrder = {
@@ -677,10 +722,10 @@
       phone: phone,
       pack: selectedPackInfo.name,
       cans: selectedPackInfo.cans,
-      pricePerCan: 40,
+      pricePerCan: 1,
       total: selectedPackInfo.total,
       status: "Sub-Zero Chilled",
-      address: address,
+      address: fullAddress,
       utr: utr,
       gateway: "PhonePe UPI (8102899986@ybl)",
       payee: "Ahsan Aziz",
@@ -703,16 +748,26 @@
       });
     } catch (e) {}
 
-    // Update Success Screen
+    // Populate Step 3 Success Screen with drop animation
     const successOrderIdEl = document.getElementById('success-order-id');
     const successOrderTotalEl = document.getElementById('success-order-total');
+    const successOrderPackEl = document.getElementById('success-order-pack');
+    const successOrderAddressEl = document.getElementById('success-order-address');
+
     if (successOrderIdEl) successOrderIdEl.innerText = orderId;
     if (successOrderTotalEl) successOrderTotalEl.innerText = `₹${selectedPackInfo.total}`;
+    if (successOrderPackEl) successOrderPackEl.innerText = selectedPackInfo.name;
+    if (successOrderAddressEl) successOrderAddressEl.innerText = `${city} (${pincode})`;
 
-    const viewForm = document.getElementById('checkout-view-form');
-    const viewSuccess = document.getElementById('checkout-view-success');
-    if (viewForm) viewForm.classList.add('hidden');
-    if (viewSuccess) viewSuccess.classList.remove('hidden');
+    const stepAddress = document.getElementById('checkout-step-address');
+    const stepPayment = document.getElementById('checkout-step-payment');
+    const stepSuccess = document.getElementById('checkout-step-success');
+    const stepCaption = document.getElementById('modal-step-caption');
+
+    if (stepAddress) stepAddress.classList.add('hidden');
+    if (stepPayment) stepPayment.classList.add('hidden');
+    if (stepSuccess) stepSuccess.classList.remove('hidden');
+    if (stepCaption) stepCaption.innerText = "Payment Verified • Order Dispatched";
   };
 
   window.addToBucket = function (btn) {

@@ -1,6 +1,6 @@
 /**
  * Vercel Serverless Function: Diet Coke Order Management API
- * Price: ₹40 per can
+ * Price: ₹1 per can
  */
 
 // Simulated persistent storage across invocations
@@ -10,8 +10,8 @@ let orders = [
     customer: "Aarav Sharma",
     pack: "The Chic Sleek 6-Pack",
     cans: 6,
-    pricePerCan: 40,
-    total: 240,
+    pricePerCan: 1,
+    total: 6,
     status: "Out for Delivery",
     address: "Bandra West, Mumbai",
     phone: "+91 98201 44521",
@@ -22,8 +22,8 @@ let orders = [
     customer: "Rohan Mehra",
     pack: "Classic 12-Pack Chiller",
     cans: 12,
-    pricePerCan: 40,
-    total: 480,
+    pricePerCan: 1,
+    total: 12,
     status: "Chilled & Packed",
     address: "Indiranagar, Bangalore",
     phone: "+91 98450 33119",
@@ -34,8 +34,8 @@ let orders = [
     customer: "Priya Verma",
     pack: "The Silver Subscription",
     cans: 24,
-    pricePerCan: 40,
-    total: 960,
+    pricePerCan: 1,
+    total: 24,
     status: "Delivered",
     address: "Defence Colony, New Delhi",
     phone: "+91 98110 99882",
@@ -46,8 +46,8 @@ let orders = [
     customer: "Ananya Patel",
     pack: "The Chic Sleek 6-Pack",
     cans: 6,
-    pricePerCan: 40,
-    total: 240,
+    pricePerCan: 1,
+    total: 6,
     status: "Delivered",
     address: "Koregaon Park, Pune",
     phone: "+91 97640 11203",
@@ -74,7 +74,7 @@ module.exports = async (req, res) => {
 
     return res.status(200).json({
       success: true,
-      pricePerCan: 40,
+      pricePerCan: 1,
       currency: "INR (₹)",
       totalRevenue,
       totalCans,
@@ -83,7 +83,7 @@ module.exports = async (req, res) => {
     });
   }
 
-  // POST: Create a new order (at ₹40 per can)
+  // POST: Create a new order (at ₹1 per can)
   if (req.method === "POST") {
     try {
       let body = req.body;
@@ -104,14 +104,14 @@ module.exports = async (req, res) => {
       } = body || {};
 
       const canCount = parseInt(cans, 10) || 6;
-      const totalAmount = total ? parseInt(total, 10) : canCount * 40; // ₹40 per can
+      const totalAmount = total ? parseInt(total, 10) : canCount * 1; // ₹1 per can
 
       const newOrder = {
         id,
         customer: customer.trim() || "Guest Customer",
         pack,
         cans: canCount,
-        pricePerCan: 40,
+        pricePerCan: 1,
         total: totalAmount,
         status: "Sub-Zero Chilled",
         address: address.trim(),
@@ -126,7 +126,7 @@ module.exports = async (req, res) => {
 
       return res.status(201).json({
         success: true,
-        message: "Order placed successfully at ₹40 per can!",
+        message: "Order placed successfully at ₹1 per can!",
         order: newOrder
       });
     } catch (err) {
