@@ -560,27 +560,85 @@
       if (icon) icon.classList.remove('hidden');
     }
 
-    const priceText = card.querySelector('span.font-semibold').innerText.split('/')[0];
+    const priceText = card.querySelector('span.font-semibold').innerText.split('/')[0].trim();
     const bucketText = document.getElementById('bucket-text');
     if (bucketText) bucketText.innerText = `Add to Ice Bucket • ${priceText}`;
   };
 
   window.addToBucket = function (btn) {
+    // Determine active selected pack
+    const activeCard = document.querySelector('.pack-card.ring-primary-container') || document.querySelector('.pack-card');
+    let packName = "The Chic Sleek 6-Pack";
+    let cans = 6;
+    let total = 240;
+
+    if (activeCard) {
+      const titleEl = activeCard.querySelector('h4');
+      if (titleEl) packName = titleEl.innerText.trim();
+      if (packName.includes("12-Pack")) {
+        cans = 12;
+        total = 480;
+      } else if (packName.includes("Subscription")) {
+        cans = 24;
+        total = 960;
+      }
+    }
+
+    const newOrder = {
+      id: `DC-${Math.floor(1000 + Math.random() * 9000)}`,
+      customer: "Metropolitan Customer",
+      pack: packName,
+      cans: cans,
+      pricePerCan: 40,
+      total: total,
+      status: "Sub-Zero Chilled",
+      address: "Express Cold Drop",
+      timestamp: new Date().toISOString()
+    };
+
+    // Save to local storage for immediate Admin Dashboard visibility
+    try {
+      const existing = JSON.parse(localStorage.getItem("diet_coke_orders_v1") || "[]");
+      existing.unshift(newOrder);
+      localStorage.setItem("diet_coke_orders_v1", JSON.stringify(existing));
+    } catch (e) {}
+
+    // Send to backend API
+    try {
+      fetch("/api/orders", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(newOrder)
+      });
+    } catch (e) {}
+
+    // Button feedback
     const original = btn.innerHTML;
-    btn.innerHTML = `<span class="material-symbols-outlined text-[20px] animate-spin">autorenew</span> Added to Chiller!`;
+    btn.innerHTML = `<span class="material-symbols-outlined text-[20px] text-emerald-300">verified</span> Added to Chiller • ₹${total} (View in Dashboard ⚡)`;
     btn.classList.add('bg-white', 'text-black');
+
     setTimeout(() => {
       btn.innerHTML = original;
       btn.classList.remove('bg-white', 'text-black');
-    }, 1800);
+    }, 2800);
   };
 
   window.handleSubscribe = function (btn) {
     const input = btn.previousElementSibling.querySelector('input');
     if (input && input.value.includes('@')) {
-      btn.innerText = "Welcome to the Silver Circle";
+      const email = input.value.trim();
+      btn.innerText = "✓ Welcome to the Silver Circle";
       btn.classList.add('bg-primary-container', 'text-on-primary-container');
       input.value = "";
+
+      // Post to backend API
+      try {
+        fetch("/api/subscribe", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ email })
+        });
+      } catch (e) {}
     } else if (input) {
       input.focus();
     }

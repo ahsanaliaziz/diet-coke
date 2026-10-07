@@ -142,6 +142,11 @@
     </div>
 
     <div class="nav-actions">
+      <a href="dashboard.html" class="nav-btn primary-btn" style="text-decoration: none;">
+        <span class="material-symbols-outlined text-[15px]">dashboard</span>
+        <span>Dashboard ⚡</span>
+      </a>
+
       <button class="nav-btn" onclick="scrollToShowcase()">
         <span>Showcase ↓</span>
       </button>
@@ -159,7 +164,7 @@
         <span id="sound-label">Audio FX</span>
       </button>
 
-      <button id="autoplay-btn" class="nav-btn primary-btn">
+      <button id="autoplay-btn" class="nav-btn">
         <svg id="play-icon" class="icon" viewBox="0 0 24 24" fill="currentColor">
           <polygon points="5 3 19 12 5 21 5 3"></polygon>
         </svg>
@@ -663,9 +668,9 @@
       <!-- 6. ORDER THE CHILL / CONCIERGE PACK SELECTOR -->
       <section class="py-space-lg flex flex-col gap-space-md" id="chill-selector">
         <div class="flex flex-col text-center items-center">
-          <span class="font-label-sm text-label-sm uppercase tracking-widest text-primary-container">Chilled Express Delivery</span>
+          <span class="font-label-sm text-label-sm uppercase tracking-widest text-primary-container">Chilled Express Delivery • ₹40 / Can</span>
           <h2 class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface uppercase tracking-tight">Concierge Cold Reserve</h2>
-          <p class="font-body-sm text-body-sm text-secondary mt-1 max-w-xs">Packaged in insulated silver cases, delivered at sub-zero drinking temperature.</p>
+          <p class="font-body-sm text-body-sm text-secondary mt-1 max-w-xs">Packaged in insulated silver cases, delivered at sub-zero drinking temperature. Flat ₹40 per can.</p>
         </div>
 
         <!-- Packs Stack -->
@@ -677,9 +682,9 @@
                 <span class="material-symbols-outlined text-primary text-[22px]">view_in_ar</span>
                 <h4 class="font-headline-sm text-headline-sm text-on-surface">The Chic Sleek 6-Pack</h4>
               </div>
-              <span class="font-headline-sm text-headline-sm text-on-surface font-semibold">$14.00</span>
+              <span class="font-headline-sm text-headline-sm text-on-surface font-semibold">₹240</span>
             </div>
-            <p class="font-body-sm text-body-sm text-secondary">355ml Slim Can Editions • Pre-frosted inside silver thermal sleeve.</p>
+            <p class="font-body-sm text-body-sm text-secondary">6 Cans × ₹40 • Pre-frosted inside silver thermal sleeve.</p>
             <div class="flex items-center justify-between pt-2">
               <span class="font-label-sm text-[11px] text-primary uppercase tracking-wider">Fast chilled drop in 45 mins</span>
               <span class="pack-check w-5 h-5 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center">
@@ -695,9 +700,9 @@
                 <span class="material-symbols-outlined text-secondary text-[22px]">inventory_2</span>
                 <h4 class="font-headline-sm text-headline-sm text-on-surface">Classic 12-Pack Chiller</h4>
               </div>
-              <span class="font-headline-sm text-headline-sm text-on-surface font-semibold">$24.00</span>
+              <span class="font-headline-sm text-headline-sm text-on-surface font-semibold">₹480</span>
             </div>
-            <p class="font-body-sm text-body-sm text-secondary">Original heritage dimensions • Packed with dry-ice crystals.</p>
+            <p class="font-body-sm text-body-sm text-secondary">12 Cans × ₹40 • Packed with dry-ice crystals.</p>
             <div class="flex items-center justify-between pt-2">
               <span class="font-label-sm text-[11px] text-secondary uppercase tracking-wider">Standard cold drop</span>
               <span class="pack-check w-5 h-5 rounded-full bg-surface-container-highest text-secondary flex items-center justify-center">
@@ -713,9 +718,9 @@
                 <span class="material-symbols-outlined text-secondary text-[22px]">all_inclusive</span>
                 <h4 class="font-headline-sm text-headline-sm text-on-surface">The Silver Subscription</h4>
               </div>
-              <span class="font-headline-sm text-headline-sm text-on-surface font-semibold">$38.00<span class="text-body-sm font-normal text-secondary">/mo</span></span>
+              <span class="font-headline-sm text-headline-sm text-on-surface font-semibold">₹960<span class="text-body-sm font-normal text-secondary">/mo</span></span>
             </div>
-            <p class="font-body-sm text-body-sm text-secondary">24 Cans bi-weekly + exclusive runway limited can collabs.</p>
+            <p class="font-body-sm text-body-sm text-secondary">24 Cans bi-weekly (₹40/can) + exclusive limited drops.</p>
             <div class="flex items-center justify-between pt-2">
               <span class="font-label-sm text-[11px] text-primary uppercase tracking-wider">Includes VIP Silver Access</span>
               <span class="pack-check w-5 h-5 rounded-full bg-surface-container-highest text-secondary flex items-center justify-center">
@@ -728,7 +733,7 @@
         <!-- Add to Bucket Button with Feedback -->
         <button class="w-full py-4 rounded-full bg-primary-container text-on-primary-container font-label-lg text-label-lg uppercase tracking-widest shadow-xl flex items-center justify-center gap-2 active:scale-[0.98] transition-transform mt-2 hover:opacity-95" onclick="addToBucket(this)">
           <span class="material-symbols-outlined text-[20px]">ice_skating</span>
-          <span id="bucket-text">Add to Ice Bucket • $14.00</span>
+          <span id="bucket-text">Add to Ice Bucket • ₹240</span>
         </button>
 
         <div class="flex items-center justify-center gap-2 text-secondary font-label-sm text-label-sm uppercase tracking-wider">

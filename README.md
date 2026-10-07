@@ -1,8 +1,8 @@
-# Diet Coke — Kinetic Scroll Experience & Aesthetic Showcase 🧊⚡
+# Diet Coke — Kinetic Scroll Experience & Admin Command Center 🧊⚡
 
-An award-winning Apple-style canvas scroll animation and high-fashion aesthetic showcase for Diet Coke.
+An award-winning Apple-style canvas scroll animation, interactive Silver Aesthetic Lookbook, and serverless Admin Order Dashboard for Diet Coke.
 
-Featuring a 240-frame 60 FPS sub-zero kinetic splash sequence, silky lerp dampening, Web Audio API synthesis, and an interactive Silver Aesthetic Lookbook.
+Flat retail price: **₹40 per 355ml Can** across all packs.
 
 ---
 
@@ -27,26 +27,53 @@ Featuring a 240-frame 60 FPS sub-zero kinetic splash sequence, silky lerp dampen
 
 ---
 
-## 🚀 Quick Start (Local)
+## ⚡ Pricing Standard (INR)
+
+- **Flat Rate**: **₹40 / can**
+- **The Chic Sleek 6-Pack**: **₹240** (6 Cans × ₹40)
+- **Classic 12-Pack Chiller**: **₹480** (12 Cans × ₹40)
+- **The Silver Subscription**: **₹960/mo** (24 Cans × ₹40)
+
+---
+
+## 🛠️ Backend & Serverless API Architecture
+
+Pre-configured for Vercel Serverless Functions in `/api`:
+
+- **`GET /api/orders`**: Retrieve live orders, total revenue (₹), and cans dispatched.
+- **`POST /api/orders`**: Create a new customer order at ₹40/can.
+- **`PATCH /api/orders`**: Advance order status (`Sub-Zero Chilled` -> `Out for Delivery` -> `Delivered`).
+- **`GET /api/dashboard`**: Telemetry metrics, warehouse chiller temperatures (-2.4°C), and stock levels.
+- **`POST /api/subscribe`**: Add email to the Silver Circle newsletter list.
+- **Functional API Key**: `DC_PROD_LIVE_KEY_8204`
+
+---
+
+## 📊 Admin Dashboard
+
+Access the real-time command center at:
+👉 **`/dashboard.html`**
+
+- Live order status progression (Chilled → Out for Delivery → Delivered).
+- Interactive order creator modal with automatic ₹40/can pricing.
+- API Key manager & live serverless latency ping test.
+- Export orders dataset as JSON.
+
+---
+
+## 🚀 Local Development
 
 Run with Python:
 ```bash
 python3 -m http.server 3000
 ```
-Open [http://localhost:3000](http://localhost:3000) in your browser.
-
-Or with Node:
-```bash
-npx serve .
-```
+Open [http://localhost:3000](http://localhost:3000) or [http://localhost:3000/dashboard.html](http://localhost:3000/dashboard.html).
 
 ---
 
-## ⚡ Deploy to Vercel
+## 🌐 Vercel Deployment
 
-This repository is pre-configured for **Vercel** with optimized asset caching in `vercel.json`.
-
-1. Import this repository in [Vercel](https://vercel.com/new).
-2. Framework Preset: **Other** (Static Site).
-3. Root Directory: `./`
-4. Click **Deploy**!
+Configured for one-click deployment on Vercel:
+1. Import repository on [Vercel](https://vercel.com/new).
+2. Framework: **Other**
+3. Serverless functions in `/api` and static assets in `./` deploy automatically.
